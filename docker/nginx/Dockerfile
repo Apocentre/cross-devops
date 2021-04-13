@@ -34,16 +34,18 @@ RUN git clone --recursive https://github.com/maxmind/libmaxminddb.git &&\
     echo /usr/local/lib  >> /etc/ld.so.conf.d/local.conf && \
     ldconfig
 
+ARG MAX_MIND_KEY
+
 # Download MaxMind GeoLite2 databases
-RUN mkdir -p /usr/share/GeoIP/ &&\
-    wget http://geolite.maxmind.com/download/geoip/database/GeoLite2-City.mmdb.gz &&\
-    gunzip GeoLite2-City.mmdb.gz &&\
-    # echo "070602eb835f1241dd23a25c2297ed6d  GeoLite2-City.mmdb" | md5sum -c - &&\
-    mv GeoLite2-City.mmdb /usr/share/GeoIP/ &&\
-    wget http://geolite.maxmind.com/download/geoip/database/GeoLite2-Country.mmdb.gz &&\
-    gunzip GeoLite2-Country.mmdb.gz &&\
-    # echo "4171e632162fb32a89a044b968bd0802  GeoLite2-Country.mmdb" | md5sum -c - &&\
-    mv GeoLite2-Country.mmdb /usr/share/GeoIP/
+RUN mkdir -p /usr/share/GeoIP/
+COPY docker/nginx/GeoLite2-City_20210406.tar.gz ./
+COPY docker/nginx/GeoLite2-Country_20210413.tar.gz ./
+
+RUN tar -xf GeoLite2-City_20210406.tar.gz &&\
+    ls . &&\
+    mv GeoLite2-City_20210406/GeoLite2-City.mmdb /usr/share/GeoIP/ &&\
+    tar -xf GeoLite2-Country_20210413.tar.gz &&\
+    mv GeoLite2-Country_20210413/GeoLite2-Country.mmdb /usr/share/GeoIP/
     
 # Download Nginx and the Nginx geoip2 module
 ENV nginx_version 1.19.9
