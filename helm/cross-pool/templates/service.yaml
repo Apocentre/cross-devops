@@ -4,6 +4,7 @@ metadata:
   name: {{ include "cross-pool.fullname" . }}
   labels:
     {{- include "cross-pool.labels" . | nindent 4 }}
+  namespace: {{ .Values.ns }}
 spec:
   type: {{ .Values.service.type }}
   ports:

@@ -4,6 +4,7 @@ metadata:
   name: {{ include "cross-api.fullname" . }}
   labels:
     {{- include "cross-api.labels" . | nindent 4 }}
+  namespace: {{ .Values.ns }}
 spec:
   {{- if not .Values.autoscaling.enabled }}
   replicas: {{ .Values.replicaCount }}

@@ -5,6 +5,7 @@
 replicaCount: 1
 
 env: staging
+ns: hotcross
 
 image:
   repository: hotcross/cross-pool
