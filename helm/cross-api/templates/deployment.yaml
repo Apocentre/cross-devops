@@ -38,7 +38,37 @@ spec:
 {{tpl (.Files.Get "conf/env.staging.yaml") . |  indent 12 }}
 {{- else if eq .Values.env "production" }}
 {{tpl (.Files.Get "conf/env.prod.yaml") . |  indent 12 }}
-{{- end }}          
+{{- end }}
+            - name: ETH_WEB3_PROVIDER
+              valueFrom:
+                secretKeyRef:
+                  name: {{ template "cross-api.secrets.fullname" . }}
+                  key: eth-web3-provider
+            - name: BSC_WEB3_PROVIDER
+              valueFrom:
+                secretKeyRef:
+                  name: {{ template "cross-api.secrets.fullname" . }}
+                  key: bsc-web3-provider
+            - name: AWS_ACCESS_KEY_ID
+              valueFrom:
+                secretKeyRef:
+                  name: {{ template "cross-api.secrets.fullname" . }}
+                  key: aws-access-key-id
+            - name: AWS_SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: {{ template "cross-api.secrets.fullname" . }}
+                  key: aws-secret-key
+            - name: LOGGLY_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: {{ template "cross-api.secrets.fullname" . }}
+                  key: loggly-token
+            - name: LOGGLY_SUBDOMAIN
+              valueFrom:
+                secretKeyRef:
+                  name: {{ template "cross-api.secrets.fullname" . }}
+                  key: loggly-subdomain
           ports:
             - name: http
               containerPort: 80
