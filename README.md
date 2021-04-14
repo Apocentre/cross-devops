@@ -42,3 +42,22 @@ https://kubernetes.io/docs/tasks/access-application-cluster/web-ui-dashboard/
 
   `kubectl -n kubernetes-dashboard  describe secret kubernetes-dashboard-token-j7hpq`
 
+5. Install cert-manager to handle the ssl certificates for the ingress
+
+  - `kubectl create namespace cert-manager`
+  - `helm repo add jetstack https://charts.jetstack.io`
+  - `helm repo update`
+  - `kubectl apply -f https://github.com/jetstack/cert-manager/releases/download/v1.3.0/cert-manager.crds.yaml`
+  - Install the chart
+
+  ```
+  helm install \
+  cert-manager jetstack/cert-manager \
+  --namespace cert-manager \
+  --version v1.3.0 \
+  //--set installCRDs=true
+  ```
+
+
+https://cert-manager.io/docs/installation/kubernetes/
+https://www.digitalocean.com/community/tutorials/how-to-set-up-an-nginx-ingress-on-digitalocean-kubernetes-using-helm
