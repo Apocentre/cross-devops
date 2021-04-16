@@ -25,22 +25,13 @@ https://docs.digitalocean.com/products/kubernetes/how-to/connect-to-cluster/
 
 https://kubernetes.io/docs/tasks/access-application-cluster/web-ui-dashboard/
 
-3. Start the proxy
+3. Open the dashboard
 
-`kubectl proxy`
+Go to the cluster page on DO 
 
-4. Open the dashboard
+https://cloud.digitalocean.com/kubernetes/clusters/ 
 
-`http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/`
-
-- Use token to login
-  - Find the name of the secret
-
-  `kubectl -n kubernetes-dashboard get secrets`
-
-  - get the token from the secret
-
-  `kubectl -n kubernetes-dashboard  describe secret kubernetes-dashboard-token-j7hpq`
+and click the Kubernetes Dashboard button
 
 5. Install cert-manager to handle the ssl certificates for the ingress
 
@@ -54,10 +45,25 @@ https://kubernetes.io/docs/tasks/access-application-cluster/web-ui-dashboard/
   helm install \
   cert-manager jetstack/cert-manager \
   --namespace cert-manager \
-  --version v1.3.0 \
-  //--set installCRDs=true
+  --version v1.3.0
   ```
+
 
 
 https://cert-manager.io/docs/installation/kubernetes/
 https://www.digitalocean.com/community/tutorials/how-to-set-up-an-nginx-ingress-on-digitalocean-kubernetes-using-helm
+
+
+**DEPRECATED(This is relevant if we manually create a dashboard)**
+Open the dashboard
+
+`http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/`
+
+- Use token to login
+  - Find the name of the secret
+
+  `kubectl -n kubernetes-dashboard get secrets`
+
+  - get the token from the secret
+
+  `kubectl -n kubernetes-dashboard  describe secret kubernetes-dashboard-token-j7hpq`
