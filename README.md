@@ -13,19 +13,13 @@ Get The GEOIP database
 ===
 https://www.maxmind.com/en/accounts/534933/geoip/downloads
 
-
-#k8s Cluster
+Connect to the cluster
 ===
-
-1. Connect to the cluster
 
 https://docs.digitalocean.com/products/kubernetes/how-to/connect-to-cluster/
 
-2. Setup the k8s dashboard
-
-https://kubernetes.io/docs/tasks/access-application-cluster/web-ui-dashboard/
-
-3. Open the dashboard
+Open K8s dashboard
+===
 
 Go to the cluster page on DO 
 
@@ -33,7 +27,8 @@ https://cloud.digitalocean.com/kubernetes/clusters/
 
 and click the Kubernetes Dashboard button
 
-5. Install cert-manager to handle the ssl certificates for the ingress
+Install cert-manager to handle the ssl certificates for the ingress
+===
 
   - `kubectl create namespace cert-manager`
   - `helm repo add jetstack https://charts.jetstack.io`
@@ -48,14 +43,26 @@ and click the Kubernetes Dashboard button
   --version v1.3.0
   ```
 
-
-
+More info here:
 https://cert-manager.io/docs/installation/kubernetes/
 https://www.digitalocean.com/community/tutorials/how-to-set-up-an-nginx-ingress-on-digitalocean-kubernetes-using-helm
 
+Integrate DO Docker Registry with k8s
+===
+https://docs.digitalocean.com/products/container-registry/how-to/use-registry-docker-kubernetes/
+
+https://docs.digitalocean.com/products/container-registry/how-to/use-registry-docker-kubernetes/#create-secret-manually
+
+https://docs.digitalocean.com/products/container-registry/how-to/use-registry-docker-kubernetes/#add-secret-control-panel
 
 **DEPRECATED(This is relevant if we manually create a dashboard)**
+Setup the k8s dashboard
+===
+
+https://kubernetes.io/docs/tasks/access-application-cluster/web-ui-dashboard/
+
 Open the dashboard
+===
 
 `http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/`
 

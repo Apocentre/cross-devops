@@ -1,4 +1,4 @@
-apiVersion: networking.k8s.io/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   annotations:
@@ -12,10 +12,14 @@ spec:
   - host: staging-api.hotcross.com
     http:
       paths:
-      - backend:
-          serviceName: staging-api
-          servicePort: 80
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: staging-api
+            port:
+              number: 80
   tls:
   - hosts:
     - staging-api.hotcross.com
-    secretName: hello-kubernetes-tls
+    secretName: hotcross-tls
