@@ -27,6 +27,15 @@ https://cloud.digitalocean.com/kubernetes/clusters/
 
 and click the Kubernetes Dashboard button
 
+Setting up Nginx Ingress Controller
+===
+
+1. Install the ingress
+
+https://kubernetes.github.io/ingress-nginx/deploy/#digital-ocean
+
+`kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v0.45.0/deploy/static/provider/do/deploy.yaml`
+
 Install cert-manager to handle the ssl certificates for the ingress
 ===
 
@@ -39,13 +48,17 @@ Install cert-manager to handle the ssl certificates for the ingress
   ```
   helm install \
   cert-manager jetstack/cert-manager \
-  --namespace cert-manager \
+  --namespace cert-manager\
   --version v1.3.0
   ```
 
 More info here:
 https://cert-manager.io/docs/installation/kubernetes/
 https://www.digitalocean.com/community/tutorials/how-to-set-up-an-nginx-ingress-on-digitalocean-kubernetes-using-helm
+
+
+
+https://www.digitalocean.com/community/tutorials/how-to-set-up-an-nginx-ingress-with-cert-manager-on-digitalocean-kubernetes
 
 Integrate DO Docker Registry with k8s
 ===

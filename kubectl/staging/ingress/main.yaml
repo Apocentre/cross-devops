@@ -16,7 +16,7 @@ spec:
         path: "/"
         backend:
           service:
-            name: staging-api
+            name: cross-api
             port:
               number: 80
   tls:
