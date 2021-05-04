@@ -5,8 +5,6 @@ metadata:
   labels:
     {{- include "cross-api.labels" . | nindent 4 }}
   namespace: {{ .Values.ns }}
-  annotations:
-    service.beta.kubernetes.io/do-loadbalancer-hostname: "api.hotcross.com"
 spec:
   type: {{ .Values.service.type }}
   ports:

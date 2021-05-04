@@ -2,7 +2,7 @@
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: hotcross
+  name: crosspool
 ---
 apiVersion: v1
 kind: Namespace
