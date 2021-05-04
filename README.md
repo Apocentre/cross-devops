@@ -1,40 +1,33 @@
 # devops
 
-Login to Github registry
+Create Cluster
 ===
 
-You must use a personal access token with the appropriate scopes to publish and install packages in GitHub Packages.
+This is via the Digital Ocean Dashboard. 
 
-`$ cat ~/TOKEN.txt | docker login https://docker.pkg.github.com -u USERNAME --password-stdin`
+1. Click Kubernetes on the side menu
+2. Click Create Cluster button
+3. Follow the steps on the UI wizzard
+4. Create a local k8s config to connect to the cluster
 
-https://docs.github.com/en/packages/guides/configuring-docker-for-use-with-github-packages
+For example
 
-Get The GEOIP database
-===
-https://www.maxmind.com/en/accounts/534933/geoip/downloads
+`doctl kubernetes cluster kubeconfig save 52cabdf0-d413-47df-a34f-c6bffb749cd4`
 
-Connect to the cluster
-===
+The last part will be different for each cluster; 
 
-https://docs.digitalocean.com/products/kubernetes/how-to/connect-to-cluster/
-
-Open K8s dashboard
-===
-
-Go to the cluster page on DO 
-
-https://cloud.digitalocean.com/kubernetes/clusters/ 
-
-and click the Kubernetes Dashboard button
+More on that here https://docs.digitalocean.com/products/kubernetes/how-to/connect-to-cluster/
 
 Setting up Nginx Ingress Controller
 ===
-
-1. Install the ingress
+1. Add a new subdomain and point it to the LB created by DO when initializing the K8s cluster
+  We need on subdomain per service that we want to be publicly accessible through the Ingress
+  
+2. Install the ingress
 
 https://kubernetes.github.io/ingress-nginx/deploy/#digital-ocean
 
-`kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v0.45.0/deploy/static/provider/do/deploy.yaml`
+`kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v0.46.0/deploy/static/provider/do/deploy.yaml`
 
 Install cert-manager to handle the ssl certificates for the ingress
 ===
@@ -42,20 +35,27 @@ Install cert-manager to handle the ssl certificates for the ingress
   - `kubectl create namespace cert-manager`
   - `helm repo add jetstack https://charts.jetstack.io`
   - `helm repo update`
-  - `kubectl apply -f https://github.com/jetstack/cert-manager/releases/download/v1.3.0/cert-manager.crds.yaml`
+  - `kubectl apply -f https://github.com/jetstack/cert-manager/releases/download/v1.3.1/cert-manager.crds.yaml`
   - Install the chart
 
   ```
   helm install \
   cert-manager jetstack/cert-manager \
   --namespace cert-manager\
-  --version v1.3.0
+  --version v1.3.1
   ```
+
+  - Verify the installation
+  `kubectl get pods --namespace cert-manager`
+
+
+  - Create let's encrypt issuer
+  `cd kubectl/common && kubectl apply -f cert-issuer.yaml`
+
 
 More info here:
 https://cert-manager.io/docs/installation/kubernetes/
 https://www.digitalocean.com/community/tutorials/how-to-set-up-an-nginx-ingress-on-digitalocean-kubernetes-using-helm
-
 
 
 https://www.digitalocean.com/community/tutorials/how-to-set-up-an-nginx-ingress-with-cert-manager-on-digitalocean-kubernetes
@@ -67,6 +67,36 @@ https://docs.digitalocean.com/products/container-registry/how-to/use-registry-do
 https://docs.digitalocean.com/products/container-registry/how-to/use-registry-docker-kubernetes/#create-secret-manually
 
 https://docs.digitalocean.com/products/container-registry/how-to/use-registry-docker-kubernetes/#add-secret-control-panel
+
+
+Open K8s dashboard
+===
+
+Go to the cluster page on DO 
+
+https://cloud.digitalocean.com/kubernetes/clusters/ 
+
+and click the Kubernetes Dashboard button
+
+Deploy Services
+===
+
+1. Cross Api
+
+`helm install cross-api helm/cross-api`
+
+Login to Github registry
+===
+
+You must use a personal access token with the appropriate scopes to publish and install packages/images in GitHub Packages.
+
+`$ cat ~/TOKEN.txt | docker login https://docker.pkg.github.com -u USERNAME --password-stdin`
+
+https://docs.github.com/en/packages/guides/configuring-docker-for-use-with-github-packages
+
+Get The GEOIP database
+===
+https://www.maxmind.com/en/accounts/534933/geoip/downloads
 
 **DEPRECATED(This is relevant if we manually create a dashboard)**
 Setup the k8s dashboard
