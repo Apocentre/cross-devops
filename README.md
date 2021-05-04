@@ -22,12 +22,22 @@ Setting up Nginx Ingress Controller
 ===
 1. Add a new subdomain and point it to the LB created by DO when initializing the K8s cluster
   We need on subdomain per service that we want to be publicly accessible through the Ingress
+
+2. A very important step to make the cert-manager issue certificates is this 
+
+https://www.digitalocean.com/community/tutorials/how-to-set-up-an-nginx-ingress-with-cert-manager-on-digitalocean-kubernetes#step-5-%E2%80%94-enabling-pod-communication-through-the-load-balancer-optional
+
+Basically:
+
+i) Create a new DNS record on DO workaround.hotcross.com pointing to the Load Balancer
+ii) Run `kubectl apply -f kubectl/common/ingress-nginx-svc.yaml`
   
-2. Install the ingress
+3. Install the ingress
 
 https://kubernetes.github.io/ingress-nginx/deploy/#digital-ocean
 
-`kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v0.46.0/deploy/static/provider/do/deploy.yaml`
+`kubectl get pods -n ingress-nginx \
+  -l app.kubernetes.io/name=ingress-nginx --watch`
 
 Install cert-manager to handle the ssl certificates for the ingress
 ===
@@ -54,11 +64,9 @@ Install cert-manager to handle the ssl certificates for the ingress
 
 
 More info here:
-https://cert-manager.io/docs/installation/kubernetes/
-https://www.digitalocean.com/community/tutorials/how-to-set-up-an-nginx-ingress-on-digitalocean-kubernetes-using-helm
-
-
-https://www.digitalocean.com/community/tutorials/how-to-set-up-an-nginx-ingress-with-cert-manager-on-digitalocean-kubernetes
+- https://cert-manager.io/docs/installation/kubernetes/
+- https://www.digitalocean.com/community/tutorials/how-to-set-up-an-nginx-ingress-on-digitalocean-kubernetes-using-helm
+- https://www.digitalocean.com/community/tutorials/how-to-set-up-an-nginx-ingress-with-cert-manager-on-digitalocean-kubernetes
 
 Integrate DO Docker Registry with k8s
 ===

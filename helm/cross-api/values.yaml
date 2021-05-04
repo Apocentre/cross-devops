@@ -5,7 +5,7 @@
 replicaCount: 1
 
 env: staging
-ns: hotcross
+ns: api
 
 image:
   repository: registry.digitalocean.com/hotcross/cross-api
