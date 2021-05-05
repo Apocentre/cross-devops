@@ -134,3 +134,10 @@ Open the dashboard
   - get the token from the secret
 
   `kubectl -n kubernetes-dashboard  describe secret kubernetes-dashboard-token-j7hpq`
+
+
+Notes
+===
+- A very useful tutorial on setting up Cert Manager is
+
+https://www.digitalocean.com/community/tutorials/how-to-set-up-an-nginx-ingress-with-cert-manager-on-digitalocean-kubernetes
