@@ -100,6 +100,10 @@ Deploy Services
 
 `helm install cross-api helm/cross-api`
 
+When we update some of the values of the chart we can then upgrade by running:
+
+`helm upgrade cross-api helm/cross-api`
+
 Login to Github registry
 ===
 
