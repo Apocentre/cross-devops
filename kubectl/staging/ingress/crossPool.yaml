@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+  name: crosspool
+  namespace: cross-pool
+spec:
+  rules:
+  - host: crosspool.hotcross.com
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: cross-pool
+            port:
+              number: 80
+  tls:
+  - hosts:
+    - crosspool.hotcross.com
+    secretName: hotcross-tls
