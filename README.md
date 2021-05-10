@@ -67,11 +67,10 @@ More info here:
 Basically:
 
 i) Create a new DNS record on DO balancer.hotcross.com pointing to the Load Balancer
-ii) Run `kubectl apply -f kubectl/common/ingress-nginx-svc.yaml`
+ii) Run `kubectl apply -f kubectl/<environment>/ingress/ingress-nginx-svc.yaml`
 
 
-3. Add a new subdomain and point it to the LB created by DO when initializing the K8s cluster
-  We need on subdomain per service that we want to be publicly accessible through the Ingress
+3. Add a new subdomain and point it to the LB created by DO when initializing the K8s cluster. We need one subdomain per service that we want to be publicly accessible through the Ingress. 
 
 Authentication
 ===
