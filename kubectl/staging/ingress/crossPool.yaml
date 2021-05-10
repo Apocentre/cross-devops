@@ -8,7 +8,7 @@ metadata:
   namespace: cross-pool
 spec:
   rules:
-  - host: crosspool.hotcross.com
+  - host: crosspool.hotcross.dev
     http:
       paths:
       - pathType: Prefix
@@ -20,5 +20,5 @@ spec:
               number: 80
   tls:
   - hosts:
-    - crosspool.hotcross.com
+    - crosspool.hotcross.dev
     secretName: hotcross-tls
