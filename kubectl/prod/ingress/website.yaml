@@ -1,0 +1,25 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    nginx.ingress.kubernetes.io/temporal-redirect: https://hotcross.com/Hot-Cross-Abstract-1-0-0-b633afaa914e4918869712f378425b5b
+  name: website
+  namespace: default
+spec:
+  rules:
+  - host: hotcross.com
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: ingress-f179811ccbfd6adda04af6755c52b325
+            port:
+              number: 80
+  tls:
+  - hosts:
+    - hotcross.com
+    secretName: hotcross-tls
