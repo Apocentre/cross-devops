@@ -82,14 +82,6 @@ To check the status of the certificates after a deployment is running we can run
 
 You can run this for any namespace (-n) on which we have deployed an ingress
 
-Authentication
-===
-
-We need to allow devs to access the k8s cluster.
-
-Follow this guide:
-
-https://www.digitalocean.com/community/tutorials/recommended-steps-to-secure-a-digitalocean-kubernetes-cluster
 
 Open K8s dashboard
 ===

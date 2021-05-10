@@ -5,15 +5,16 @@
 replicaCount: 1
 
 env: staging
-ns: hotcross
+ns: crosspool
 
 image:
-  repository: hotcross/cross-pool
+  repository: registry.digitalocean.com/hotcross-staging/cross-pool
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: 0.1.0
+  tag: 1.0.0-beta
 
-imagePullSecrets: []
+imagePullSecrets:
+  - name: "hotcross-staging"
 nameOverride: ""
 fullnameOverride: ""
 
