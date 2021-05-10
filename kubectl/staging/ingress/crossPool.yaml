@@ -5,7 +5,7 @@ metadata:
     kubernetes.io/ingress.class: nginx
     cert-manager.io/cluster-issuer: letsencrypt-prod
   name: crosspool
-  namespace: cross-pool
+  namespace: crosspool
 spec:
   rules:
   - host: crosspool.hotcross.dev
