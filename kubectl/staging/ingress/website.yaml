@@ -3,23 +3,23 @@ kind: Ingress
 metadata:
   annotations:
     kubernetes.io/ingress.class: nginx
-    nginx.ingress.kubernetes.io/proxy-body-size: 10m
     cert-manager.io/cluster-issuer: letsencrypt-prod
-  name: api
-  namespace: api
+    nginx.ingress.kubernetes.io/temporal-redirect: https://hotcross.com/Hot-Cross-Abstract-1-0-0-b633afaa914e4918869712f378425b5b
+  name: website
+  namespace: default
 spec:
   rules:
-  - host: api.hotcross.dev
+  - host: hotcross.dev
     http:
       paths:
       - pathType: Prefix
         path: "/"
         backend:
           service:
-            name: cross-api
+            name: ingress-f179811ccbfd6adda04af6755c52b325
             port:
               number: 80
   tls:
   - hosts:
-    - api.hotcross.dev
+    - hotcross.dev
     secretName: hotcross-tls
