@@ -66,7 +66,7 @@ More info here:
 
 Basically:
 
-i) Create a new DNS record on DO balancer.hotcross.com pointing to the Load Balancer
+i) Create a new DNS record on DO balancer.hotcross.com (or balancer.hotcross.com if on staging) pointing to the Load Balancer
 ii) Run `kubectl apply -f kubectl/<environment>/ingress/ingress-nginx-svc.yaml`
 
 
@@ -98,7 +98,7 @@ Common Tasks
 
 2. Create Ingresses
 
-`kubectl apply -f kubectl/prod/ingress/`
+`kubectl apply -f kubectl/<environment>/ingress/`
 
 Deploy Services
 ===
