@@ -22,9 +22,13 @@ Integrate DO Docker Registry with k8s
 ===
 https://docs.digitalocean.com/products/container-registry/how-to/use-registry-docker-kubernetes/
 
-https://docs.digitalocean.com/products/container-registry/how-to/use-registry-docker-kubernetes/#create-secret-manually
+We need to then use the following value in all of our Helm charts
 
-https://docs.digitalocean.com/products/container-registry/how-to/use-registry-docker-kubernetes/#add-secret-control-panel
+```
+imagePullSecrets:
+  - name: "hotcross" // or "hotcross-staging" for staging env
+```
+
 
 Setting up Nginx Ingress Controller
 ===
@@ -71,6 +75,12 @@ ii) Run `kubectl apply -f kubectl/<environment>/ingress/ingress-nginx-svc.yaml`
 
 
 3. Add a new subdomain and point it to the LB created by DO when initializing the K8s cluster. We need one subdomain per service that we want to be publicly accessible through the Ingress. 
+
+To check the status of the certificates after a deployment is running we can run the following command:
+
+`kubectl describe certificate hotcross-tls -n api` 
+
+You can run this for any namespace (-n) on which we have deployed an ingress
 
 Authentication
 ===
