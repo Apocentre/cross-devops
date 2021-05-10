@@ -81,7 +81,7 @@ With the pavlos signed certificate in hand, you can now build the user’s kubec
 
 `cp misc/config/k8s/config ./certs/pavlos/config-pavlos`
 
-And change the user props to redsemble the following file:
+And change the user props to resemble the following file:
 
 ```
 apiVersion: v1
@@ -107,7 +107,7 @@ users:
 2. You can test the new user connection using kubectl cluster-info:
 
 ```
-kubectl --kubeconfig=/home/your_local_user/.kube/config-sammy cluster-info
+kubectl --kubeconfig=./certs/pavlos/config-pavlos cluster-info
 ```
 
 You should see something like this:
@@ -134,8 +134,8 @@ and any other ns we add in the future
 2. Next, verify user permissions by listing pods in the default namespace. 
 
 ```
-kubectl --kubeconfig=./certs/nikos/config-nikos auth can-i get pods -n api
-kubectl --kubeconfig=./certs/nikos/config-nikos auth can-i get pods -n crosspool
+kubectl --kubeconfig=./certs/pavlos/config-pavlos auth can-i get pods -n api
+kubectl --kubeconfig=./certs/pavlos/config-pavlos auth can-i get pods -n crosspool
 
 and any other ns we add in the future
 ```
