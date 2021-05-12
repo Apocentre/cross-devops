@@ -50,7 +50,7 @@ Check that load balancer service is running
 Install cert-manager to handle the ssl certificates for the ingress
 ===
 
-  `kubectl apply -f https://github.com/jetstack/cert-manager/releases/download/v1.3.1/cert-manager.yaml`
+  - `kubectl apply -f https://github.com/jetstack/cert-manager/releases/download/v1.3.1/cert-manager.yaml`
 
   NOTE: If the above command fails try installing it using Helm
 
@@ -87,26 +87,17 @@ More info here:
 Basically:
 
 i) Create a new DNS record on DO balancer.hotcross.com (or balancer.hotcross.com if on staging) pointing to the Load Balancer
-ii) Run `kubectl apply -f kubectl/<environment>/ingress/ingress-nginx-svc.yaml`
+ii) Run `kubectl apply -f kubectl/<environment>/lb/ingress-nginx-svc.yaml`
 
 
 3. Add a new subdomain and point it to the LB created by DO when initializing the K8s cluster. We need one subdomain per service that we want to be publicly accessible through the Ingress. 
 
-To check the status of the certificates after a deployment is running we can run the following command:
+To check the status of the certificates after a deployment (see steps below) is running we can run the following command:
 
 `kubectl describe certificate hotcross-tls -n api` 
 
 You can run this for any namespace (-n) on which we have deployed an ingress
 
-
-Open K8s dashboard
-===
-
-Go to the cluster page on DO 
-
-https://cloud.digitalocean.com/kubernetes/clusters/ 
-
-and click the Kubernetes Dashboard button
 
 Common Tasks
 ===
@@ -128,6 +119,15 @@ Deploy Services
 When we update some of the values of the chart we can then upgrade by running:
 
 `helm upgrade cross-api helm/cross-api`
+
+Open K8s dashboard
+===
+
+Go to the cluster page on DO 
+
+https://cloud.digitalocean.com/kubernetes/clusters/ 
+
+and click the Kubernetes Dashboard button
 
 Login to Github registry
 ===
@@ -170,3 +170,10 @@ Notes
 - A very useful tutorial on setting up Cert Manager is
 
 https://www.digitalocean.com/community/tutorials/how-to-set-up-an-nginx-ingress-with-cert-manager-on-digitalocean-kubernetes
+
+Troubleshooting
+===
+
+1. Cert manager 
+
+https://stackoverflow.com/questions/64624877/cert-manager-certificate-creation-stuck-at-created-new-certificaterequest-resour/65809340#65809340
