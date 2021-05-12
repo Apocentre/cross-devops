@@ -52,6 +52,22 @@ Install cert-manager to handle the ssl certificates for the ingress
 
   `kubectl apply -f https://github.com/jetstack/cert-manager/releases/download/v1.3.1/cert-manager.yaml`
 
+  NOTE: If the above command fails try installing it using Helm
+
+  1. `kubectl create namespace cert-manager`
+  2. `helm repo add jetstack https://charts.jetstack.io`
+  3. `helm repo update`
+  4. `kubectl apply -f https://github.com/jetstack/cert-manager/releases/download/v1.3.1/cert-manager.crds.yaml`
+  5. and finally
+
+  ```
+  helm install \
+  cert-manager jetstack/cert-manager \
+  --namespace cert-manager \
+  --create-namespace \
+  --version v1.3.1
+  ```
+
   - Verify the installation
   `kubectl get pods --namespace cert-manager`
 
