@@ -125,6 +125,7 @@ Granting Permissions
 1. Assign edit permissions to the user pavlos in all namespace using the following commands:
 
 ```
+kubectl create rolebinding michalis-edit-role --clusterrole=edit --user=michalis --namespace=default
 kubectl create rolebinding pavlos-edit-role --clusterrole=edit --user=pavlos --namespace=api
 kubectl create rolebinding pavlos-edit-role --clusterrole=edit --user=pavlos --namespace=crosspool
 
