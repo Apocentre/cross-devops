@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "cross-bridge-dapp.fullname" . }}
+  labels:
+    {{- include "cross-bridge-dapp.labels" . | nindent 4 }}
+  namespace: {{ .Values.ns }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: {{ .Values.service.port }}
+      targetPort: http
+      protocol: TCP
+      name: http
+  selector:
+    {{- include "cross-bridge-dapp.selectorLabels" . | nindent 4 }}
