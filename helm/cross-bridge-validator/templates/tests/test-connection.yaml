@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: "{{ include "cross-bridge-validator.fullname" . }}-test-connection"
+  labels:
+    {{- include "cross-bridge-validator.labels" . | nindent 4 }}
+  annotations:
+    "helm.sh/hook": test
+spec:
+  containers:
+    - name: wget
+      image: busybox
+      command: ['wget']
+      args: ['{{ include "cross-bridge-validator.fullname" . }}:{{ .Values.service.port }}']
+  restartPolicy: Never
