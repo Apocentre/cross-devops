@@ -164,16 +164,6 @@ Open the dashboard
 
   `kubectl -n kubernetes-dashboard  describe secret kubernetes-dashboard-token-j7hpq`
 
-Deploy Redis
-===
-```
-helm install redis bitnami/redis \
-  --namespace microservices \
-  --set password=3ziOIfyQXfcHo6VcOTflFwzkp05VnHou \
-  --set cluster.enabled=false
-```
-
-
 Notes
 ===
 - A very useful tutorial on setting up Cert Manager is

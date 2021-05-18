@@ -13,3 +13,8 @@ apiVersion: v1
 kind: Namespace
 metadata:
   name: crossbridge
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: storage
