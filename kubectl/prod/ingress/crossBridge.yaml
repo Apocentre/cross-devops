@@ -5,7 +5,7 @@ metadata:
     kubernetes.io/ingress.class: nginx
     cert-manager.io/cluster-issuer: letsencrypt-prod
   name: crossbridge
-  namespace: crosspool
+  namespace: crossbridge
 spec:
   rules:
   - host: bridge.hotcross.com
@@ -15,7 +15,7 @@ spec:
         path: "/"
         backend:
           service:
-            name: cross-pool
+            name: cross-bridge-dapp
             port:
               number: 80
   tls:

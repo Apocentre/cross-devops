@@ -12,9 +12,9 @@ This is via the Digital Ocean Dashboard.
 
 For example
 
-`doctl kubernetes cluster kubeconfig save 52cabdf0-d413-47df-a34f-c6bffb749cd4`
+`doctl kubernetes cluster kubeconfig save aadb9808-3988-4984-8f2c-6f8f490e5c67`
 
-The last part will be different for each cluster; 
+The last part will be different for cluster; the one in the above example points to the production cluster
 
 More on that here https://docs.digitalocean.com/products/kubernetes/how-to/connect-to-cluster/
 
