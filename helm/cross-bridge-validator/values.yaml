@@ -9,7 +9,7 @@ ns: crossbridge
 
 image:
   # use registry.digitalocean.com/hotcross-staging/cross-pool for staging env
-  repository: registry.digitalocean.com/hotcross/cross-bridge-validator
+  repository: registry.digitalocean.com/hotcross/validator
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
   tag: 1.5.3

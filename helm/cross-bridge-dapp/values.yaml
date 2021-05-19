@@ -9,7 +9,7 @@ ns: crossbridge
 
 image:
   # use registry.digitalocean.com/hotcross-staging/cross-bridge-dapp for staging env
-  repository: registry.digitalocean.com/hotcross/cross-bridge-dapp
+  repository: registry.digitalocean.com/hotcross/dapp
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
   tag: 2.0.0.hotcross
