@@ -70,6 +70,11 @@ spec:
                 secretKeyRef:
                   name: {{ template "cross-api.secrets.fullname" . }}
                   key: loggly-subdomain
+            - name: REDIS_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ template "cross-api.secrets.fullname" . }}
+                  key: redis-password
           ports:
             - name: http
               containerPort: {{ .Values.service.port }}
