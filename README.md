@@ -176,3 +176,21 @@ Troubleshooting
 1. Cert manager 
 
 https://stackoverflow.com/questions/64624877/cert-manager-certificate-creation-stuck-at-created-new-certificaterequest-resour/65809340#65809340
+
+2. Automatic Helm Upgrades
+
+This is useful when we want to update an env variable for example but the image tag is still the same.
+
+https://v3.helm.sh/docs/howto/charts_tips_and_tricks/#automatically-roll-deployments
+
+3. Helm Upgrade issue
+
+If you see this error when running helm upgrade
+
+`Error: UPGRADE FAILED: timed out waiting for the condition`
+
+Then you can rollback
+
+`helm rollback`
+
+will rollback to the previous revision.
