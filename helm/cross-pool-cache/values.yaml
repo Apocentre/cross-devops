@@ -2,10 +2,10 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
-replicaCount: 4
+replicaCount: 1
 
 env: production
-ns: api
+ns: microservices
 
 image:
   # use registry.digitalocean.com/hotcross-staging/cross-pool for staging env
