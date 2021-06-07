@@ -5,3 +5,4 @@ metadata:
   namespace: ingress-nginx
 data:
   6379: "indexer/redis-master:6379"
+  9092: "indexer/kafka:9092"

@@ -6,3 +6,5 @@ spec:
         ports:
          - containerPort: 6379
            hostPort: 6379
+         - containerPort: 9092
+           hostPort: 9092
