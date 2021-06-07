@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+  name: indexer
+  namespace: indexer
+spec:
+  rules:
+  - host: redis.hotcross.dev
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: redis-master
+            port:
+              number: 80
+  tls:
+  - hosts:
+    - redis.hotcross.dev
+    secretName: hotcross-tls
