@@ -17,8 +17,19 @@ spec:
           service:
             name: redis-master
             port:
-              number: 80
+              number: 6379
+  - host: kafka.hotcross.dev
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: kafka
+            port:
+              number: 9092
   tls:
   - hosts:
     - redis.hotcross.dev
+    - kafka.hotcross.dev
     secretName: hotcross-tls

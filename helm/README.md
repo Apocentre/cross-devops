@@ -27,6 +27,7 @@ helm install redis bitnami/redis \
 
 To expose it via ingress follow this tutorial https://minikube.sigs.k8s.io/docs/tutorials/nginx_tcp_udp_ingress/
 
+
 2. Kafka
 
   ```bash
