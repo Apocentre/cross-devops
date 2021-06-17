@@ -38,7 +38,12 @@ spec:
 {{- else if eq .Values.env "production" }}
 {{tpl (.Files.Get "conf/env.prod.yaml") . | indent 12 }}
 {{- end }}
-            - name: WEB3_PROVIDER
+            - name: ETH_WEB3_PROVIDER
+              valueFrom:
+                secretKeyRef:
+                  name: {{ template "cross-pool-cache.secrets.fullname" . }}
+                  key: web3-provider
+            - name: BSC_WEB3_PROVIDER
               valueFrom:
                 secretKeyRef:
                   name: {{ template "cross-pool-cache.secrets.fullname" . }}
