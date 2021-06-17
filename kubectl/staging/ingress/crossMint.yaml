@@ -18,7 +18,18 @@ spec:
             name: cross-mint
             port:
               number: 80
+  - host: mint-api.hotcross.dev
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: cross-mint-api
+            port:
+              number: 80
   tls:
   - hosts:
     - mint.hotcross.dev
+    - mint-api.hotcross.dev
     secretName: hotcross-tls
