@@ -1,0 +1,26 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/limit-connections: '5'
+    nginx.ingress.kubernetes.io/limit-rpm: '60'
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+  name: crossmint
+  namespace: crossmint
+spec:
+  rules:
+  - host: crossmint.hotcross.com
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: cross-mint
+            port:
+              number: 80
+  tls:
+  - hosts:
+    - crossmint.hotcross.com
+    secretName: hotcross-tls
