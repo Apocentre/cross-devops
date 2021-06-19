@@ -18,11 +18,11 @@ Deploy Indexer Services
 
 ```bash
 helm install redis bitnami/redis \
-  --namespace indexer \
+  -n indexer \
   --set auth.password=Lma5LVU8lMcDRAFwKMLmcUuiIQ+uXaEZIm2eahgr \
   --set cluster.enabled=false \
-  --set master.persistence.size=1Gi \
-  --set replica.persistence.size=1Gi
+  --set master.persistence.size=10Gi \
+  --set replica.persistence.size=10Gi
 ```
 
 To expose it via ingress follow this tutorial https://minikube.sigs.k8s.io/docs/tutorials/nginx_tcp_udp_ingress/
@@ -37,10 +37,19 @@ To expose it via ingress follow this tutorial https://minikube.sigs.k8s.io/docs/
     --set replicaCount=1 \
     --set deleteTopicEnable=true \
     --set autoCreateTopicsEnable=true \
-    --set persistence.size=1Gi
+    --set persistence.size=100Gi
   ```
 
   Kafka is available:
   - at `kafka.indexer.svc.cluster.local:9092` for consumers
   - at `kafka-0.kafka-headless.indexer.svc.cluster.local:9092` for producers,
 
+3. Deploy Neo4j
+
+  ```bash
+  helm install neo4j helm/neo4j \
+  --set core.standalone=true \
+  --set acceptLicenseAgreement=yes \
+  --set neo4jPassword=5lDVI7lZTbzUlqCxEkqqdGPcX2J5/y8dVJ731BH/
+
+  ```
