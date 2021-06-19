@@ -89,7 +89,7 @@ or
   ```
 
   Neo4JS is available:
-    - at `neo4j.indexer.svs.cluster.local:7687`
+    - at `neo4j-neo4j.indexer.svs.cluster.local:7687`
 
 **Run command line**
 
