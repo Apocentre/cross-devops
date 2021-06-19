@@ -1,9 +1,9 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "cross-pool-connector.fullname" . }}
+  name: {{ include "cross-pool-consumer.fullname" . }}
   labels:
-    {{- include "cross-pool-connector.labels" . | nindent 4 }}
+    {{- include "cross-pool-consumer.labels" . | nindent 4 }}
   namespace: {{ .Values.ns }}
 spec:
   {{- if not .Values.autoscaling.enabled }}
@@ -11,19 +11,19 @@ spec:
   {{- end }}
   selector:
     matchLabels:
-      {{- include "cross-pool-connector.selectorLabels" . | nindent 6 }}
+      {{- include "cross-pool-consumer.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       annotations:
         rollme: {{ randAlphaNum 5 | quote }}
       labels:
-        {{- include "cross-pool-connector.selectorLabels" . | nindent 8 }}
+        {{- include "cross-pool-consumer.selectorLabels" . | nindent 8 }}
     spec:
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      serviceAccountName: {{ include "cross-pool-connector.serviceAccountName" . }}
+      serviceAccountName: {{ include "cross-pool-consumer.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
@@ -38,26 +38,31 @@ spec:
 {{- else if eq .Values.env "production" }}
 {{tpl (.Files.Get "conf/env.prod.yaml") . | indent 12 }}
 {{- end }}
-            - name: BSC_WEB3_PROVIDER
+            - name: NEO4J_USERNAME
               valueFrom:
                 secretKeyRef:
-                  name: {{ template "cross-pool-connector.secrets.fullname" . }}
-                  key: bsc-web3-provider
+                  name: {{ template "cross-pool-consumer.secrets.fullname" . }}
+                  key: neo4j-username
+            - name: NEO4J_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ template "cross-pool-consumer.secrets.fullname" . }}
+                  key: neo4j-password
+            - name: REDIS_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ template "cross-pool-consumer.secrets.fullname" . }}
+                  key: redis-password
             - name: LOGGLY_TOKEN
               valueFrom:
                 secretKeyRef:
-                  name: {{ template "cross-pool-connector.secrets.fullname" . }}
+                  name: {{ template "cross-pool-consumer.secrets.fullname" . }}
                   key: loggly-token
             - name: LOGGLY_SUBDOMAIN
               valueFrom:
                 secretKeyRef:
-                  name: {{ template "cross-pool-connector.secrets.fullname" . }}
+                  name: {{ template "cross-pool-consumer.secrets.fullname" . }}
                   key: loggly-subdomain
-            - name: REDIS_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: {{ template "cross-pool-connector.secrets.fullname" . }}
-                  key: redis-password
           ports:
             - name: http
               containerPort: {{ .Values.service.port }}
