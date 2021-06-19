@@ -16,11 +16,13 @@ Deploy Indexer Services
 ===
 1. Redis (same as earlier)
 
+// the password used below is for the staging environment
 ```bash
 helm install redis bitnami/redis \
   -n indexer \
   --set auth.password=Lma5LVU8lMcDRAFwKMLmcUuiIQ+uXaEZIm2eahgr \
   --set cluster.enabled=false \
+  --set replica.replicaCount=1 \
   --set master.persistence.size=10Gi \
   --set replica.persistence.size=10Gi
 ```
@@ -46,10 +48,15 @@ To expose it via ingress follow this tutorial https://minikube.sigs.k8s.io/docs/
 
 3. Deploy Neo4j
 
+  // the password used below is for the staging environment
   ```bash
   helm install neo4j helm/neo4j \
+  -n indexer \
   --set core.standalone=true \
   --set acceptLicenseAgreement=yes \
-  --set neo4jPassword=5lDVI7lZTbzUlqCxEkqqdGPcX2J5/y8dVJ731BH/
-
+  --set neo4jPassword=klC/ddwf0hok1xuilAgBWkhGbR7/gOqifnkWC+Ga \
+  --set core.persistentVolume.size=50Gi
   ```
+
+  Neo4JS is available:
+    - at `neo4j.indexer.svs.cluster.local:7687`
