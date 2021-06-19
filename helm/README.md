@@ -29,6 +29,18 @@ helm install redis bitnami/redis \
 
 To expose it via ingress follow this tutorial https://minikube.sigs.k8s.io/docs/tutorials/nginx_tcp_udp_ingress/
 
+- Connect to the pod
+
+`kubectl -n indexer exec  --stdin --tty redis-master-0 -- /bin/bash`
+
+- Run the command line tool
+
+`redis-cli`
+
+- Authenticate
+
+`auth`
+
 
 2. Kafka
 
@@ -46,6 +58,24 @@ To expose it via ingress follow this tutorial https://minikube.sigs.k8s.io/docs/
   - at `kafka.indexer.svc.cluster.local:9092` for consumers
   - at `kafka-0.kafka-headless.indexer.svc.cluster.local:9092` for producers,
 
+**Run command line**
+
+- Connect to the pod
+
+`kubectl -n indexer exec  --stdin --tty kafka-0   -- /bin/bash`
+
+- Create a topic
+
+`kafka-topics.sh --create --topic cross-pool-events --bootstrap-server localhost:9092`
+
+- Verify the topic was created
+
+`kafka-topics.sh --describe --topic cross-pool-events --bootstrap-server localhost:9092`
+
+or 
+
+`kafka-topics.sh --list --bootstrap-server localhost:9092`
+
 3. Deploy Neo4j
 
   // the password used below is for the staging environment
@@ -60,3 +90,15 @@ To expose it via ingress follow this tutorial https://minikube.sigs.k8s.io/docs/
 
   Neo4JS is available:
     - at `neo4j.indexer.svs.cluster.local:7687`
+
+**Run command line**
+
+- Connect to the pod
+
+`kubectl -n indexer exec  --stdin --tty neo4j-neo4j-core-0 -- /bin/bash`
+
+- Run cypher-shell
+
+`cypher-shell`
+
+and enter the credentials when prompted
