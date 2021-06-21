@@ -38,11 +38,16 @@ spec:
 {{- else if eq .Values.env "production" }}
 {{tpl (.Files.Get "conf/env.prod.yaml") . | indent 12 }}
 {{- end }}
-            - name: BSC_WEB3_PROVIDER
+            - name: NEO4J_USERNAME
               valueFrom:
                 secretKeyRef:
                   name: {{ template "analytics-api.secrets.fullname" . }}
-                  key: bsc-web3-provider
+                  key: neo4j-username
+            - name: NEO4J_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ template "analytics-api.secrets.fullname" . }}
+                  key: neo4j-password
             - name: LOGGLY_TOKEN
               valueFrom:
                 secretKeyRef:
@@ -53,11 +58,6 @@ spec:
                 secretKeyRef:
                   name: {{ template "analytics-api.secrets.fullname" . }}
                   key: loggly-subdomain
-            - name: REDIS_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: {{ template "analytics-api.secrets.fullname" . }}
-                  key: redis-password
           ports:
             - name: http
               containerPort: {{ .Values.service.port }}
