@@ -4,19 +4,19 @@
 
 replicaCount: 1
 
-env: staging
+env: production
 ns: crossmint
 
 image:
   # use registry.digitalocean.com/hotcross-staging/cross-pool for staging env
-  repository: registry.digitalocean.com/hotcross-staging/cross-mint-api
+  repository: registry.digitalocean.com/hotcross/cross-mint-api
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: 1.0.0-beta.0
+  tag: 1.0.0
 
 imagePullSecrets:
   # use hotcross-staging for staging env
-  - name: "hotcross-staging"
+  - name: "hotcross"
 nameOverride: ""
 fullnameOverride: ""
 
