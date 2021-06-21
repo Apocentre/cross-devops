@@ -1,0 +1,86 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "analytics-api.fullname" . }}
+  labels:
+    {{- include "analytics-api.labels" . | nindent 4 }}
+  namespace: {{ .Values.ns }}
+spec:
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.replicaCount }}
+  {{- end }}
+  selector:
+    matchLabels:
+      {{- include "analytics-api.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      annotations:
+        rollme: {{ randAlphaNum 5 | quote }}
+      labels:
+        {{- include "analytics-api.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "analytics-api.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      containers:
+        - name: {{ .Chart.Name }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+{{- if eq .Values.env "staging" }}
+{{tpl (.Files.Get "conf/env.staging.yaml") . | indent 12 }}
+{{- else if eq .Values.env "production" }}
+{{tpl (.Files.Get "conf/env.prod.yaml") . | indent 12 }}
+{{- end }}
+            - name: BSC_WEB3_PROVIDER
+              valueFrom:
+                secretKeyRef:
+                  name: {{ template "analytics-api.secrets.fullname" . }}
+                  key: bsc-web3-provider
+            - name: LOGGLY_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: {{ template "analytics-api.secrets.fullname" . }}
+                  key: loggly-token
+            - name: LOGGLY_SUBDOMAIN
+              valueFrom:
+                secretKeyRef:
+                  name: {{ template "analytics-api.secrets.fullname" . }}
+                  key: loggly-subdomain
+            - name: REDIS_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ template "analytics-api.secrets.fullname" . }}
+                  key: redis-password
+          ports:
+            - name: http
+              containerPort: {{ .Values.service.port }}
+              protocol: TCP
+          # livenessProbe:
+          #   httpGet:
+          #     path: /
+          #     port: http
+          # readinessProbe:
+          #   httpGet:
+          #     path: /
+          #     port: http
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
