@@ -194,3 +194,9 @@ Then you can rollback
 `helm rollback`
 
 will rollback to the previous revision.
+
+4. Identify storage left in a PVC
+
+kubectl -n <namespace> exec <pod-name> df
+
+https://stackoverflow.com/questions/53200828/how-to-identify-the-storage-space-left-in-a-persistent-volume-claim
