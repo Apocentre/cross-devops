@@ -48,6 +48,11 @@ spec:
                 secretKeyRef:
                   name: {{ template "analytics-api.secrets.fullname" . }}
                   key: neo4j-password
+            - name: SHA256_HMAC_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: {{ template "analytics-api.secrets.fullname" . }}
+                  key: sha256-hmac-key
             - name: LOGGLY_TOKEN
               valueFrom:
                 secretKeyRef:
