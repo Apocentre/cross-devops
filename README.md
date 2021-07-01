@@ -143,6 +143,25 @@ Get The GEOIP database
 https://www.maxmind.com/en/accounts/534933/geoip/downloads
 
 
+Access Kafka cli Remotely
+===
+
+1. Exec the pod
+
+`kubectl -n indexer exec  --stdin --tty kafka-0 -- /bin/bash`
+
+2. Access the cli command 
+
+`cd /opt/bitnami/kafka/bin/`
+
+For example to list all consumer groups
+
+`./kafka-consumer-groups.sh --bootstrap-server localhost:9092 --list`
+
+or to delete a consumer group
+
+`/kafka-consumer-groups.sh --bootstrap-server localhost:9092 --delete --group analytics-api-consumer-group`
+
 
 **DEPRECATED(This is relevant if we manually create a dashboard)**
 Setup the k8s dashboard
