@@ -53,6 +53,11 @@ spec:
                 secretKeyRef:
                   name: {{ template "analytics-api.secrets.fullname" . }}
                   key: sha256-hmac-key
+            - name: REDIS_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ template "cross-pool-connector.secrets.fullname" . }}
+                  key: redis-password
             - name: LOGGLY_TOKEN
               valueFrom:
                 secretKeyRef:
