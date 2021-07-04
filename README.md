@@ -160,8 +160,33 @@ For example to list all consumer groups
 
 or to delete a consumer group
 
-`/kafka-consumer-groups.sh --bootstrap-server localhost:9092 --delete --group analytics-api-consumer-group`
+`./kafka-consumer-groups.sh --bootstrap-server localhost:9092 --delete --group analytics-api-consumer-group`
 
+or create a topic 
+
+`./kafka-topics.sh --bootstrap-server localhost:9092 --create --topic cross-pool-events`
+
+or list all topics
+
+`./kafka-topics.sh --bootstrap-server localhost:9092 --list`
+
+or delete a topic 
+
+`./kafka-topics.sh --bootstrap-server localhost:9092 --delete --topic cross-pool-events`
+
+Erase Neo4j
+===
+
+`CREATE OR REPLACE DATABASE neo4j`
+
+https://stackoverflow.com/a/62539937/512783
+
+Redis-Cli
+===
+
+- delete keys matching a pattern
+
+`redis-cli -a <password> --scan --pattern reward.pool:* | xargs redis-cli -a <password> del`
 
 **DEPRECATED(This is relevant if we manually create a dashboard)**
 Setup the k8s dashboard
