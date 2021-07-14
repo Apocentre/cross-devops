@@ -28,8 +28,19 @@ spec:
             name: kafka
             port:
               number: 9092
+  - host: paisnlowkudc8g.hotcross.dev
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: analytics-api
+            port:
+              number: 80
   tls:
   - hosts:
     - redis.hotcross.dev
     - kafka.hotcross.dev
+    - paisnlowkudc8g.hotcross.dev
     secretName: hotcross-tls

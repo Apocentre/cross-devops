@@ -174,6 +174,10 @@ or delete a topic
 
 `./kafka-topics.sh --bootstrap-server localhost:9092 --delete --topic cross-pool-events`
 
+check consumer lag
+
+`/opt/bitnami/kafka/bin/kafka-consumer-groups.sh --bootstrap-server localhost:9092 --describe --group cross-pool-consumer-group`
+
 Erase Neo4j
 ===
 
