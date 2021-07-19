@@ -73,6 +73,16 @@ spec:
                 secretKeyRef:
                   name: {{ template "cross-api.secrets.fullname" . }}
                   key: redis-password
+            - name: NEO4J_DB_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: {{ template "cross-api.secrets.fullname" . }}
+                  key: neo4j-username
+            - name: NEO4J_DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ template "cross-api.secrets.fullname" . }}
+                  key: neo4j-password
           ports:
             - name: http
               containerPort: {{ .Values.service.port }}
