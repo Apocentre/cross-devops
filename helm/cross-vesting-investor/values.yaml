@@ -16,7 +16,7 @@ image:
 
 imagePullSecrets:
   # use hotcross-staging for staging env
-  - name: "hotcross-staging"
+  - name: "hotcross"
 nameOverride: ""
 fullnameOverride: ""
 
