@@ -1,0 +1,44 @@
+# Sample pod to be applied manually when desired
+# Executes a backup against the DB when tailored to the right endpoint.
+# Copies resulting full backup to $BUCKET
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: neo4j-backup
+spec:
+  template:
+    spec:
+      restartPolicy: Never
+      imagePullSecrets:
+        - name: hotcross
+      containers:
+        - name: neo4j-backup
+          image: registry.digitalocean.com/hotcross/neo4j-backup:4.2.7
+          imagePullPolicy: Always
+          env:
+          - name: DB_NAME
+            value: neo4j
+          - name: BUCKET
+            value: gs://er-neo4j-backups
+          - name: BACKUP_NAME
+            value: db-backup
+          - name: GOOGLE_APPLICATION_CREDENTIALS
+            value: /auth/credentials.json
+          volumeMounts:
+          - name: creds
+            mountPath: /auth
+            readOnly: true
+          command:
+            - "/bin/bash"
+            - "-c"
+            - |
+              export NEO4J_ADDR=neo4j-neo4j.indexer.svc.cluster.local:6362
+
+              exec /scripts/backup.sh
+      volumes:
+      - name: creds
+        secret:
+          secretName: neo4j-backup-sa
+          items:
+          - key: credentials.json
+            path: credentials.json

@@ -143,6 +143,54 @@ Get The GEOIP database
 https://www.maxmind.com/en/accounts/534933/geoip/downloads
 
 
+Access Kafka cli Remotely
+===
+
+1. Exec the pod
+
+`kubectl -n indexer exec  --stdin --tty kafka-0 -- /bin/bash`
+
+2. Access the cli command 
+
+`cd /opt/bitnami/kafka/bin/`
+
+For example to list all consumer groups
+
+`./kafka-consumer-groups.sh --bootstrap-server localhost:9092 --list`
+
+or to delete a consumer group
+
+`./kafka-consumer-groups.sh --bootstrap-server localhost:9092 --delete --group analytics-api-consumer-group`
+
+or create a topic 
+
+`./kafka-topics.sh --bootstrap-server localhost:9092 --create --topic cross-pool-events`
+
+or list all topics
+
+`./kafka-topics.sh --bootstrap-server localhost:9092 --list`
+
+or delete a topic 
+
+`./kafka-topics.sh --bootstrap-server localhost:9092 --delete --topic cross-pool-events`
+
+check consumer lag
+
+`/opt/bitnami/kafka/bin/kafka-consumer-groups.sh --bootstrap-server localhost:9092 --describe --group cross-pool-consumer-group`
+
+Erase Neo4j
+===
+
+`CREATE OR REPLACE DATABASE neo4j`
+
+https://stackoverflow.com/a/62539937/512783
+
+Redis-Cli
+===
+
+- delete keys matching a pattern
+
+`redis-cli -a <password> --scan --pattern reward.pool:* | xargs redis-cli -a <password> del`
 
 **DEPRECATED(This is relevant if we manually create a dashboard)**
 Setup the k8s dashboard
@@ -194,3 +242,9 @@ Then you can rollback
 `helm rollback`
 
 will rollback to the previous revision.
+
+4. Identify storage left in a PVC
+
+kubectl -n <namespace> exec <pod-name> df
+
+https://stackoverflow.com/questions/53200828/how-to-identify-the-storage-space-left-in-a-persistent-volume-claim

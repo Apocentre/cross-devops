@@ -27,4 +27,14 @@ metadata:
 apiVersion: v1
 kind: Namespace
 metadata:
+  name: indexer
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: crossmint
+---
+apiVersion: v1
+kind: Namespace
+metadata:
   name: crossvesting

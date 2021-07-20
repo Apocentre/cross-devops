@@ -1,0 +1,46 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+  name: indexer
+  namespace: indexer
+spec:
+  rules:
+  - host: redis.hotcross.dev
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: redis-master
+            port:
+              number: 6379
+  - host: kafka.hotcross.dev
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: kafka
+            port:
+              number: 9092
+  - host: paisnlowkudc8g.hotcross.dev
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: analytics-api
+            port:
+              number: 80
+  tls:
+  - hosts:
+    - redis.hotcross.dev
+    - kafka.hotcross.dev
+    - paisnlowkudc8g.hotcross.dev
+    secretName: hotcross-tls
