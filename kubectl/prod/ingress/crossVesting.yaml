@@ -20,7 +20,18 @@ spec:
             name: cross-vesting
             port:
               number: 80
+  - host: claim.hotcross.com
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: cross-vesting-investor
+            port:
+              number: 80
   tls:
   - hosts:
     - vest.hotcross.com
+    - claim.hotcross.com
     secretName: hotcross-tls
