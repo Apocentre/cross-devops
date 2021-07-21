@@ -6,6 +6,7 @@ replicaCount: 1
 
 env: production
 ns: crossvest
+variant: investor
 
 image:
   # use registry.digitalocean.com/hotcross-staging/cross-vest-investor for staging env
@@ -17,7 +18,7 @@ image:
 imagePullSecrets:
   # use hotcross-staging for staging env
   - name: "hotcross"
-nameOverride: ""
+nameOverride: "investor"
 fullnameOverride: ""
 
 serviceAccount:

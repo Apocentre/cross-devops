@@ -108,8 +108,8 @@ and enter the credentials when prompted
 
 - Admin
 
-`helm install cross-vest helm/cross-vest -f helm/cross-vest/values-admin.yaml`
+`helm install cross-vest-admin helm/cross-vest -f helm/cross-vest/values-admin.yaml`
 
 - Investor
 
-`helm install cross-vest helm/cross-vest -f helm/cross-vest/values-investor.yaml`
+`helm install cross-vest-investor helm/cross-vest -f helm/cross-vest/values-investor.yaml`

@@ -7,6 +7,7 @@ replicaCount: 1
 env: production
 ns: crossvest
 
+
 image:
   # use registry.digitalocean.com/hotcross-staging/cross-vest for staging env
   repository: registry.digitalocean.com/hotcross/cross-vest
@@ -17,7 +18,7 @@ image:
 imagePullSecrets:
   # use hotcross-staging for staging env
   - name: "hotcross"
-nameOverride: ""
+nameOverride: "admin"
 fullnameOverride: ""
 
 serviceAccount:
