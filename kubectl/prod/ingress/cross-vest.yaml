@@ -6,8 +6,8 @@ metadata:
     nginx.ingress.kubernetes.io/limit-connections: '5'
     nginx.ingress.kubernetes.io/limit-rpm: '60'
     cert-manager.io/cluster-issuer: letsencrypt-prod
-  name: crossvesting
-  namespace: crossvesting
+  name: crossvest
+  namespace: crossvest
 spec:
   rules:
   - host: vest.hotcross.com
@@ -17,7 +17,7 @@ spec:
         path: "/"
         backend:
           service:
-            name: cross-vesting
+            name: cross-vest-admin
             port:
               number: 80
   - host: claim.hotcross.com
@@ -27,7 +27,7 @@ spec:
         path: "/"
         backend:
           service:
-            name: cross-vesting-investor
+            name: cross-vest-investor
             port:
               number: 80
   tls:

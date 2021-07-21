@@ -1,4 +1,4 @@
-# Default values for cross-vesting-investor.
+# Default values for cross-vest-investor.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
@@ -8,8 +8,8 @@ env: production
 ns: crossvest
 
 image:
-  # use registry.digitalocean.com/hotcross-staging/cross-vesting-investor for staging env
-  repository: registry.digitalocean.com/hotcross/cross-vesting
+  # use registry.digitalocean.com/hotcross-staging/cross-vest-investor for staging env
+  repository: registry.digitalocean.com/hotcross/cross-vest
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
   tag: investor-1.0.0

@@ -4,8 +4,8 @@ metadata:
   annotations:
     kubernetes.io/ingress.class: nginx
     cert-manager.io/cluster-issuer: letsencrypt-prod
-  name: crossvesting
-  namespace: crossvesting
+  name: crossvest
+  namespace: crossvest
 spec:
   rules:
   - host: vest.hotcross.dev

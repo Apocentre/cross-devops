@@ -1,7 +1,7 @@
 {{/*
 Expand the name of the chart.
 */}}
-{{- define "cross-vesting.name" -}}
+{{- define "cross-vest.name" -}}
 {{- default .Chart.Name .Values.nameOverride | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
@@ -10,7 +10,7 @@ Create a default fully qualified app name.
 We truncate at 63 chars because some Kubernetes name fields are limited to this (by the DNS naming spec).
 If release name contains chart name it will be used as a full name.
 */}}
-{{- define "cross-vesting.fullname" -}}
+{{- define "cross-vest.fullname" -}}
 {{- if .Values.fullnameOverride }}
 {{- .Values.fullnameOverride | trunc 63 | trimSuffix "-" }}
 {{- else }}
@@ -26,16 +26,16 @@ If release name contains chart name it will be used as a full name.
 {{/*
 Create chart name and version as used by the chart label.
 */}}
-{{- define "cross-vesting.chart" -}}
+{{- define "cross-vest.chart" -}}
 {{- printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
 {{/*
 Common labels
 */}}
-{{- define "cross-vesting.labels" -}}
-helm.sh/chart: {{ include "cross-vesting.chart" . }}
-{{ include "cross-vesting.selectorLabels" . }}
+{{- define "cross-vest.labels" -}}
+helm.sh/chart: {{ include "cross-vest.chart" . }}
+{{ include "cross-vest.selectorLabels" . }}
 {{- if .Chart.AppVersion }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 {{- end }}
@@ -45,17 +45,17 @@ app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{/*
 Selector labels
 */}}
-{{- define "cross-vesting.selectorLabels" -}}
-app.kubernetes.io/name: {{ include "cross-vesting.name" . }}
+{{- define "cross-vest.selectorLabels" -}}
+app.kubernetes.io/name: {{ include "cross-vest.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
 
 {{/*
 Create the name of the service account to use
 */}}
-{{- define "cross-vesting.serviceAccountName" -}}
+{{- define "cross-vest.serviceAccountName" -}}
 {{- if .Values.serviceAccount.create }}
-{{- default (include "cross-vesting.fullname" .) .Values.serviceAccount.name }}
+{{- default (include "cross-vest.fullname" .) .Values.serviceAccount.name }}
 {{- else }}
 {{- default "default" .Values.serviceAccount.name }}
 {{- end }}
