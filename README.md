@@ -212,6 +212,12 @@ Open the dashboard
 
   `kubectl -n kubernetes-dashboard  describe secret kubernetes-dashboard-token-j7hpq`
 
+
+Nginx Http Basic Auth
+===
+
+https://www.digitalocean.com/community/tutorials/how-to-set-up-basic-http-authentication-with-nginx-on-ubuntu-14-04
+
 Notes
 ===
 - A very useful tutorial on setting up Cert Manager is
