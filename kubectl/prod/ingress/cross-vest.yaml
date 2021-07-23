@@ -10,7 +10,7 @@ metadata:
   namespace: crossvest
 spec:
   rules:
-  - host: vest.hotcross.com
+  - host: jt2x0iujievgw.hotcross.com
     http:
       paths:
       - pathType: Prefix
@@ -32,6 +32,6 @@ spec:
               number: 80
   tls:
   - hosts:
-    - vest.hotcross.com
+    - jt2x0iujievgw.hotcross.com
     - claim.hotcross.com
     secretName: hotcross-tls
