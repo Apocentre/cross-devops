@@ -38,16 +38,16 @@ spec:
 {{- else if eq .Values.env "production" }}
 {{tpl (.Files.Get "conf/env.prod.yaml") . | indent 12 }}
 {{- end }}
-            - name: ETH_WEB3_PROVIDER
+            - name: ETH_WEB3_PROVIDERS
               valueFrom:
                 secretKeyRef:
                   name: {{ template "cross-api.secrets.fullname" . }}
-                  key: eth-web3-provider
-            - name: BSC_WEB3_PROVIDER
+                  key: eth-web3-providers
+            - name: BSC_WEB3_PROVIDERS
               valueFrom:
                 secretKeyRef:
                   name: {{ template "cross-api.secrets.fullname" . }}
-                  key: bsc-web3-provider
+                  key: bsc-web3-providers
             - name: AWS_ACCESS_KEY_ID
               valueFrom:
                 secretKeyRef:
