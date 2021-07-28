@@ -50,4 +50,6 @@ i) Three instances of the cross-mint-connector running on each network each
 
 ii) One instance of the cross-mint-consumer
 
-`helm install cross-mint-consumer helm/cross-mint-consumer`
+`helm install cross-mint-consumer-1  --set nameOverride="eth" helm/cross-mint-consumer`
+`helm install cross-mint-consumer-56  --set nameOverride="bsc" helm/cross-mint-consumer`
+`helm install cross-mint-consumer-137  --set nameOverride="polygon" helm/cross-mint-consumer`

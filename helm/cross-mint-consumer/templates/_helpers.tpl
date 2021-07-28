@@ -63,5 +63,5 @@ Create the name of the service account to use
 
 {{- define "cross-mint-consumer.secrets.fullname" -}}
 {{- $name := default .Chart.Name .Values.nameOverride -}}
-{{- printf "%s-secrets" $name | trunc 63 | trimSuffix "-" -}}
+{{- printf "%s-consumer-secrets" $name | trunc 63 | trimSuffix "-" -}}
 {{- end -}}
