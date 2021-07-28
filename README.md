@@ -188,6 +188,18 @@ https://stackoverflow.com/a/62539937/512783
 Redis-Cli
 ===
 
+- Connect to the pod
+
+`kubectl -n indexer exec --stdin --tty redis-master-0 -- /bin/bash`
+
+- Run the command line tool
+
+`redis-cli`
+
+- Authenticate
+
+`auth`
+
 - delete keys matching a pattern
 
 `redis-cli -a <password> --scan --pattern reward.pool:* | xargs redis-cli -a <password> del`
