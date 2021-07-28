@@ -32,6 +32,11 @@ metadata:
 apiVersion: v1
 kind: Namespace
 metadata:
+  name: mint-indexer
+---
+apiVersion: v1
+kind: Namespace
+metadata:
   name: crossmint
 ---
 apiVersion: v1

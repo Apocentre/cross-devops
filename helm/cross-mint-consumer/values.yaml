@@ -5,7 +5,7 @@
 replicaCount: 1
 
 env: production
-ns: indexer
+ns: mint-indexer
 
 image:
   # use registry.digitalocean.com/hotcross-staging/cross-pool for staging env
