@@ -26,7 +26,6 @@ or
 
 `kafka-topics.sh --list --bootstrap-server localhost:9092`
 
-
 2. Deploy Neo4j
 
 // the password used below is for the staging environment
