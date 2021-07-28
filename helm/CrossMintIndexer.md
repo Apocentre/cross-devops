@@ -39,3 +39,9 @@ helm install neo4j helm/neo4j \
 --set neo4jPassword=QaxuCddD5Q3h6fPd6cZ8DEvSGEc4SWGT2uBZ \
 --set core.persistentVolume.size=25Gi
 ```
+
+3. Run helm install
+
+`helm install cross-mint-connector-1 --set nameOverride=1 helm/cross-mint-connector`
+`helm install cross-mint-connector-56 --set nameOverride=56 helm/cross-mint-connector`
+`helm install cross-mint-connector-137 --set nameOverride=137 helm/cross-mint-connector`
