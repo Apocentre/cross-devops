@@ -44,9 +44,9 @@ helm install neo4j helm/neo4j \
 
 i) Three instances of the cross-mint-connector running on each network each
 
-`helm install cross-mint-connector-1 --set nameOverride=1 helm/cross-mint-connector`
-`helm install cross-mint-connector-56 --set nameOverride=56 helm/cross-mint-connector`
-`helm install cross-mint-connector-137 --set nameOverride=137 helm/cross-mint-connector`
+`helm install cross-mint-connector-1 --set nameOverride="eth" helm/cross-mint-connector`
+`helm install cross-mint-connector-56 --set nameOverride="bsc" helm/cross-mint-connector`
+`helm install cross-mint-connector-137 --set nameOverride="polygon" helm/cross-mint-connector`
 
 ii) One instance of the cross-mint-consumer
 

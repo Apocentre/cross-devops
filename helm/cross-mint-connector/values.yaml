@@ -17,7 +17,7 @@ image:
 imagePullSecrets:
   # use hotcross-staging for staging env
   - name: "hotcross"
-nameOverride: "bsc"
+nameOverride: ""
 fullnameOverride: ""
 
 serviceAccount:
