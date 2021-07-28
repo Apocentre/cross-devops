@@ -12,7 +12,7 @@ image:
   repository: registry.digitalocean.com/hotcross/cross-mint-connector
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: 0.1.0
+  tag: 0.2.0
 
 imagePullSecrets:
   # use hotcross-staging for staging env
