@@ -131,6 +131,7 @@ kubectl create rolebinding pavlos-edit-role --clusterrole=edit --user=pavlos --n
 kubectl create rolebinding pavlos-edit-role --clusterrole=edit --user=pavlos --namespace=microservices
 kubectl create rolebinding pavlos-edit-role --clusterrole=edit --user=pavlos --namespace=storage
 kubectl create rolebinding pavlos-edit-role --clusterrole=edit --user=pavlos --namespace=indexer
+kubectl create rolebinding pavlos-edit-role --clusterrole=edit --user=pavlos --namespace=mint-indexer
 
 and any other ns we add in the future
 ```
