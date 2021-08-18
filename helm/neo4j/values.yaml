@@ -306,8 +306,8 @@ dbms:
   memory:
     use_memrec: false
     heap:
-      initial_size: ""
-      max_size: ""
+      initial_size: "2G"
+      max_size: "2G"
     pagecache:
       size: ""
     transaction:
