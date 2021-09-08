@@ -21,4 +21,4 @@ spec:
   tls:
   - hosts:
     - crosspool2.hotcross.dev
-    secretName: hotcross-tls
+    secretName: hotcross-tls-2

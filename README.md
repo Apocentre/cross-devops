@@ -243,6 +243,19 @@ Troubleshooting
 
 https://stackoverflow.com/questions/64624877/cert-manager-certificate-creation-stuck-at-created-new-certificaterequest-resour/65809340#65809340
 
+**Multiple ingress**
+
+If we need to use multiple ingress files in the same namespace the we would need to use a different tls secretName.
+
+```
+  tls:
+  - hosts:
+    - crosspool2.hotcross.dev
+    secretName: hotcross-tls-2
+```
+
+Basically, in order to have multiple ingresses generating multiple certificates is necessary.
+
 2. Automatic Helm Upgrades
 
 This is useful when we want to update an env variable for example but the image tag is still the same.
