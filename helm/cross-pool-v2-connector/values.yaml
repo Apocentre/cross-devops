@@ -8,15 +8,15 @@ env: staging
 ns: indexer
 
 image:
-  # use registry.digitalocean.com/hotcross-staging/cross-pool for staging env
-  repository: registry.digitalocean.com/hotcross-staging/cross-pool-v2-connector
+  # use registry.digitalocean.com/hotcross-staging/cross-pool-v2-connector for staging env
+  repository: registry.digitalocean.com/hotcross/cross-pool-v2-connector
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: 0.1.0-beta.0
+  tag: 0.1.0
 
 imagePullSecrets:
   # use hotcross-staging for staging env
-  - name: "hotcross-staging"
+  - name: "hotcross"
 nameOverride: ""
 fullnameOverride: ""
 
