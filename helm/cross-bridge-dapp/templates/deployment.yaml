@@ -16,7 +16,7 @@ spec:
     metadata:
       {{- with .Values.podAnnotations }}
       annotations:
-        {{- toYaml . | nindent 8 }}
+        rollme: {{ randAlphaNum 5 | quote }}
       {{- end }}
       labels:
         {{- include "cross-bridge-dapp.selectorLabels" . | nindent 8 }}

@@ -274,6 +274,10 @@ Then you can rollback
 
 will rollback to the previous revision.
 
+You can find the revisions here 
+
+`helm history <chart-name>`
+
 4. Identify storage left in a PVC
 
 kubectl -n <namespace> exec <pod-name> df
