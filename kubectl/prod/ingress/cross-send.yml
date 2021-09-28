@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+  name: crosssend
+  namespace: crosssend
+spec:
+  rules:
+  - host: send.hotcross.com
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: cross-send
+            port:
+              number: 80
+  tls:
+  - hosts:
+    - send.hotcross.com
+    secretName: hotcross-tls
