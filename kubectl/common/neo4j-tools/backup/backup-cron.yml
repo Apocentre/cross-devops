@@ -4,7 +4,7 @@ metadata:
   name: neo4j-backup
   namespace: indexer
 spec:
-  schedule: "0 */6 * * *" # every 6 hours
+  schedule: "0 0 * * *" # at midnight every day
   jobTemplate:
     spec:
       template:
