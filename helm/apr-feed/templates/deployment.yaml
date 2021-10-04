@@ -34,15 +34,15 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           env:
 {{- if eq .Values.env "staging" }}
-{{tpl (.Files.Get "conf/env.staging.yaml") . | indent 12 }}
+{{ .Files.Get (printf "conf/%s/env.staging.yaml" .Values.nameOverride) | indent 12 }}
 {{- else if eq .Values.env "production" }}
-{{tpl (.Files.Get "conf/env.prod.yaml") . | indent 12 }}
+{{ .Files.Get (printf "conf/%s/env.prod.yaml" .Values.nameOverride) | indent 12 }}
 {{- end }}
-            - name: BSC_WEB3_PROVIDER
+            - name: WEB3_PROVIDER
               valueFrom:
                 secretKeyRef:
                   name: {{ template "apr-feed.secrets.fullname" . }}
-                  key: bsc-web3-provider
+                  key: web3-provider
             - name: LOGGLY_TOKEN
               valueFrom:
                 secretKeyRef:
