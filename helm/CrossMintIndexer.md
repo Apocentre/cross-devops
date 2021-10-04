@@ -12,17 +12,17 @@ In the first iteration we will use the same Redis and Kafka instances as the one
 
 - Create a topic
 
-`kafka-topics.sh --create --topic cross-mint-events-1 --bootstrap-server localhost:9092`
-`kafka-topics.sh --create --topic cross-mint-events-56 --bootstrap-server localhost:9092`
-`kafka-topics.sh --create --topic cross-mint-events-137 --bootstrap-server localhost:9092`
-`kafka-topics.sh --create --topic cross-mint-events-128 --bootstrap-server localhost:9092`
+- `kafka-topics.sh --create --topic cross-mint-events-1 --bootstrap-server localhost:9092`
+- `kafka-topics.sh --create --topic cross-mint-events-56 --bootstrap-server localhost:9092`
+- `kafka-topics.sh --create --topic cross-mint-events-137 --bootstrap-server localhost:9092`
+- `kafka-topics.sh --create --topic cross-mint-events-128 --bootstrap-server localhost:9092`
 
 - Verify the topic was created
 
-`kafka-topics.sh --describe --topic cross-mint-events-1  --bootstrap-server localhost:9092`
-`kafka-topics.sh --describe --topic cross-mint-events-56  --bootstrap-server localhost:9092`
-`kafka-topics.sh --describe --topic cross-mint-events-137  --bootstrap-server localhost:9092`
-`kafka-topics.sh --describe --topic cross-mint-events-128  --bootstrap-server localhost:9092`
+- `kafka-topics.sh --describe --topic cross-mint-events-1  --bootstrap-server localhost:9092`
+- `kafka-topics.sh --describe --topic cross-mint-events-56  --bootstrap-server localhost:9092`
+- `kafka-topics.sh --describe --topic cross-mint-events-137  --bootstrap-server localhost:9092`
+- `kafka-topics.sh --describe --topic cross-mint-events-128  --bootstrap-server localhost:9092`
 
 or
 
