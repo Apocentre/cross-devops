@@ -78,6 +78,7 @@ More info here:
 - https://cert-manager.io/docs/installation/kubernetes/
 - https://www.digitalocean.com/community/tutorials/how-to-set-up-an-nginx-ingress-on-digitalocean-kubernetes-using-helm
 - https://www.digitalocean.com/community/tutorials/how-to-set-up-an-nginx-ingress-with-cert-manager-on-digitalocean-kubernetes
+- https://cert-manager.io/docs/configuration/acme/dns01/digitalocean/
 
 2. A very important step to make the cert-manager issue certificates is this 
 
