@@ -225,6 +225,16 @@ Open the dashboard
 
   `kubectl -n kubernetes-dashboard  describe secret kubernetes-dashboard-token-j7hpq`
 
+Networking
+===
+
+- CNAME Setup on Cloudflare
+
+https://support.cloudflare.com/hc/en-us/articles/360020348832
+
+A CNAME setup allows a customer to maintain authoritative DNS outside of Cloudflare.  It allows individual subdomains to benefit from Cloudflare's services without requiring updates for a domain's registration to point to Cloudflare's nameservers for DNS resolution. 
+
+Be careful not to confuse CNAME setup terminology with CNAME records which are available in the DNS app for all plan types.
 
 Nginx Http Basic Auth
 ===
