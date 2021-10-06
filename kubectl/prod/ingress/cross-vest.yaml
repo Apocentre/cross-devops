@@ -6,25 +6,27 @@ metadata:
     nginx.ingress.kubernetes.io/limit-connections: '5'
     nginx.ingress.kubernetes.io/limit-rpm: '60'
     cert-manager.io/cluster-issuer: letsencrypt-prod
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+    nginx.ingress.kubernetes.io/enable-cors: "true"
   name: crossvest
   namespace: crossvest
 spec:
   rules:
-  - host: jt2x0iujievgw.hotcross.com
+  - host: app.hotcross.com
     http:
       paths:
       - pathType: Prefix
-        path: "/"
+        path: /vest(/|$)(.*)
         backend:
           service:
             name: cross-vest-admin
             port:
               number: 80
-  - host: claim.hotcross.com
+  - host: app.hotcross.com
     http:
       paths:
       - pathType: Prefix
-        path: "/"
+        path: /claim(/|$)(.*)
         backend:
           service:
             name: cross-vest-investor
@@ -32,6 +34,5 @@ spec:
               number: 80
   tls:
   - hosts:
-    - jt2x0iujievgw.hotcross.com
-    - claim.hotcross.com
+    - app.hotcross.com
     secretName: hotcross-tls

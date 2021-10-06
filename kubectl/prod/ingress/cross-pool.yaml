@@ -11,11 +11,11 @@ metadata:
   namespace: crosspool
 spec:
   rules:
-  - host: crosspool.hotcross.com
+  - host: app.hotcross.com
     http:
       paths:
       - pathType: Prefix
-        path: "/"
+        path: /
         backend:
           service:
             name: cross-pool
@@ -23,5 +23,5 @@ spec:
               number: 80
   tls:
   - hosts:
-    - crosspool.hotcross.com
+    - app.hotcross.com
     secretName: hotcross-tls
