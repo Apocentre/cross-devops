@@ -4,17 +4,18 @@ metadata:
   annotations:
     kubernetes.io/ingress.class: nginx
     cert-manager.io/cluster-issuer: letsencrypt-prod
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
     nginx.ingress.kubernetes.io/enable-cors: "true"
     nginx.ingress.kubernetes.io/proxy-body-size: 50m
   name: crossmint
   namespace: crossmint
 spec:
   rules:
-  - host: mint.hotcross.dev
+  - host: app.hotcross.dev
     http:
       paths:
       - pathType: Prefix
-        path: "/"
+        path: /mint(/|$)(.*)
         backend:
           service:
             name: cross-mint
@@ -32,6 +33,6 @@ spec:
               number: 80
   tls:
   - hosts:
-    - mint.hotcross.dev
+    - app.hotcross.dev
     - mint-api.hotcross.dev
     secretName: hotcross-tls

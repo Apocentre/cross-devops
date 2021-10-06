@@ -4,15 +4,17 @@ metadata:
   annotations:
     kubernetes.io/ingress.class: nginx
     cert-manager.io/cluster-issuer: letsencrypt-prod
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+    nginx.ingress.kubernetes.io/enable-cors: "true"
   name: crossbridge
   namespace: crossbridge
 spec:
   rules:
-  - host: bridge.hotcross.dev
+  - host: app.hotcross.dev
     http:
       paths:
       - pathType: Prefix
-        path: "/"
+        path: /bridge(/|$)(.*)
         backend:
           service:
             name: cross-bridge-dapp
@@ -20,5 +22,5 @@ spec:
               number: 80
   tls:
   - hosts:
-    - bridge.hotcross.dev
+    - app.hotcross.dev
     secretName: hotcross-tls-crossbridge
