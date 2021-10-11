@@ -1,9 +1,9 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "price-feed.fullname" . }}
+  name: {{ include "cross-yield-consumer.fullname" . }}
   labels:
-    {{- include "price-feed.labels" . | nindent 4 }}
+    {{- include "cross-yield-consumer.labels" . | nindent 4 }}
   namespace: {{ .Values.ns }}
 spec:
   {{- if not .Values.autoscaling.enabled }}
@@ -11,19 +11,19 @@ spec:
   {{- end }}
   selector:
     matchLabels:
-      {{- include "price-feed.selectorLabels" . | nindent 6 }}
+      {{- include "cross-yield-consumer.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       annotations:
         rollme: {{ randAlphaNum 5 | quote }}
       labels:
-        {{- include "price-feed.selectorLabels" . | nindent 8 }}
+        {{- include "cross-yield-consumer.selectorLabels" . | nindent 8 }}
     spec:
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      serviceAccountName: {{ include "price-feed.serviceAccountName" . }}
+      serviceAccountName: {{ include "cross-yield-consumer.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
@@ -38,26 +38,31 @@ spec:
 {{- else if eq .Values.env "production" }}
 {{ .Files.Get (printf "conf/%s/env.prod.yaml" .Values.nameOverride) | indent 12 }}
 {{- end }}
-            - name: WEB3_PROVIDER
+            - name: NEO4J_USERNAME
               valueFrom:
                 secretKeyRef:
-                  name: {{ template "price-feed.secrets.fullname" . }}
-                  key: web3-provider
+                  name: {{ template "cross-yield-consumer.secrets.fullname" . }}
+                  key: neo4j-username
+            - name: NEO4J_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ template "cross-yield-consumer.secrets.fullname" . }}
+                  key: neo4j-password
+            - name: REDIS_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ template "cross-yield-consumer.secrets.fullname" . }}
+                  key: redis-password
             - name: LOGGLY_TOKEN
               valueFrom:
                 secretKeyRef:
-                  name: {{ template "price-feed.secrets.fullname" . }}
+                  name: {{ template "cross-yield-consumer.secrets.fullname" . }}
                   key: loggly-token
             - name: LOGGLY_SUBDOMAIN
               valueFrom:
                 secretKeyRef:
-                  name: {{ template "price-feed.secrets.fullname" . }}
+                  name: {{ template "cross-yield-consumer.secrets.fullname" . }}
                   key: loggly-subdomain
-            - name: REDIS_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: {{ template "price-feed.secrets.fullname" . }}
-                  key: redis-password
           ports:
             - name: http
               containerPort: {{ .Values.service.port }}
