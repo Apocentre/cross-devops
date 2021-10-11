@@ -38,11 +38,6 @@ spec:
 {{- else if eq .Values.env "production" }}
 {{ .Files.Get (printf "conf/%s/env.prod.yaml" .Values.nameOverride) | indent 12 }}
 {{- end }}
-            - name: WEB3_PROVIDER
-              valueFrom:
-                secretKeyRef:
-                  name: {{ template "cross-kyc-consumer.secrets.fullname" . }}
-                  key: web3-provider
             - name: REDIS_PASSWORD
               valueFrom:
                 secretKeyRef:
@@ -58,16 +53,11 @@ spec:
                 secretKeyRef:
                   name: {{ template "cross-kyc-consumer.secrets.fullname" . }}
                   key: neo4j-password
-            - name: LOGGLY_TOKEN
+            - name: PRIV_KEY
               valueFrom:
                 secretKeyRef:
                   name: {{ template "cross-kyc-consumer.secrets.fullname" . }}
-                  key: loggly-token
-            - name: LOGGLY_SUBDOMAIN
-              valueFrom:
-                secretKeyRef:
-                  name: {{ template "cross-kyc-consumer.secrets.fullname" . }}
-                  key: loggly-subdomain
+                  key: priv-key
           ports:
             - name: http
               containerPort: {{ .Values.service.port }}
