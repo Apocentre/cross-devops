@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "dex-data-feed.fullname" . }}
+  labels:
+    {{- include "dex-data-feed.labels" . | nindent 4 }}
+  namespace: {{ .Values.ns }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: {{ .Values.service.port }}
+      targetPort: http
+      protocol: TCP
+      name: http
+  selector:
+    {{- include "dex-data-feed.selectorLabels" . | nindent 4 }}

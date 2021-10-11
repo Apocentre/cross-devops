@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: "{{ include "dex-data-feed.fullname" . }}-test-connection"
+  labels:
+    {{- include "dex-data-feed.labels" . | nindent 4 }}
+  annotations:
+    "helm.sh/hook": test
+spec:
+  containers:
+    - name: wget
+      image: busybox
+      command: ['wget']
+      args: ['{{ include "dex-data-feed.fullname" . }}:{{ .Values.service.port }}']
+  restartPolicy: Never

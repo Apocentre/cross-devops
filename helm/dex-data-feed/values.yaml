@@ -1,4 +1,4 @@
-# Default values for apr-feed.
+# Default values for dex-data-feed.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
@@ -9,7 +9,7 @@ ns: indexer
 
 image:
   # use registry.digitalocean.com/hotcross-staging/cross-pool for staging env
-  repository: registry.digitalocean.com/hotcross/apr-feed
+  repository: registry.digitalocean.com/hotcross/dex-data-feed
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
   tag: 0.1.0
