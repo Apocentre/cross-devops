@@ -1,4 +1,4 @@
-# Default values for hotcross.
+# Default values for hotcross-app.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
@@ -8,14 +8,14 @@ env: production
 ns: hotcross
 
 image:
-  # use registry.digitalocean.com/hotcross-staging/hotcross for staging env
-  repository: registry.digitalocean.com/hotcross/hotcross
+  # use registry.digitalocean.com/hotcross-staging/hotcross-app for staging env
+  repository: registry.digitalocean.com/hotcross/hotcross-app
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
   tag: 2.0.0
 
 imagePullSecrets:
-  # use hotcross-staging for staging env
+  # use hotcross-app-staging for staging env
   - name: "hotcross"
 nameOverride: ""
 fullnameOverride: ""

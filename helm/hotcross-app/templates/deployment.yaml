@@ -1,9 +1,9 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "hotcross.fullname" . }}
+  name: {{ include "hotcross-app.fullname" . }}
   labels:
-    {{- include "hotcross.labels" . | nindent 4 }}
+    {{- include "hotcross-app.labels" . | nindent 4 }}
   namespace: {{ .Values.ns }}
 spec:
   {{- if not .Values.autoscaling.enabled }}
@@ -11,7 +11,7 @@ spec:
   {{- end }}
   selector:
     matchLabels:
-      {{- include "hotcross.selectorLabels" . | nindent 6 }}
+      {{- include "hotcross-app.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       {{- with .Values.podAnnotations }}
@@ -19,13 +19,13 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       labels:
-        {{- include "hotcross.selectorLabels" . | nindent 8 }}
+        {{- include "hotcross-app.selectorLabels" . | nindent 8 }}
     spec:
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      serviceAccountName: {{ include "hotcross.serviceAccountName" . }}
+      serviceAccountName: {{ include "hotcross-app.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
