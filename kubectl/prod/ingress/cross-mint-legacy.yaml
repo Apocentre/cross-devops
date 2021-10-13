@@ -17,6 +17,7 @@ spec:
         path: /
         backend:
           service:
+            # this doesn't have to be a real service; we can give any name we want
             name: http-svc
             port:
               number: 80
