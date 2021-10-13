@@ -3,25 +3,24 @@ kind: Ingress
 metadata:
   annotations:
     kubernetes.io/ingress.class: nginx
-    nginx.ingress.kubernetes.io/limit-connections: '20'
-    nginx.ingress.kubernetes.io/limit-rpm: '60'
-    nginx.ingress.kubernetes.io/upstream-hash-by: $remote_addr
     cert-manager.io/cluster-issuer: letsencrypt-prod
-  name: crosspool
-  namespace: crosspool
+    kubernetes.io/tls-acme: "true"
+    nginx.ingress.kubernetes.io/temporal-redirect: https://app.hotcross.com/mint
+  name: crossmintlegacy
+  namespace: crossmint
 spec:
   rules:
-  - host: app.hotcross.com
+  - host: mint.hotcross.com
     http:
       paths:
       - pathType: Prefix
         path: /
         backend:
           service:
-            name: cross-pool
+            name: http-svc
             port:
               number: 80
   tls:
   - hosts:
-    - app.hotcross.com
-    secretName: hotcross-tls
+    - mint.hotcross.com
+    secretName: cross-mint-legacy-tls
