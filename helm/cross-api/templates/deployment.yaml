@@ -88,6 +88,16 @@ spec:
                 secretKeyRef:
                   name: {{ template "cross-api.secrets.fullname" . }}
                   key: kyc-priv-key
+            - name: SYNAPSE_CLIENT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: {{ template "cross-api.secrets.fullname" . }}
+                  key: synapse-client-id
+            - name: SYNAPSE_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: {{ template "cross-api.secrets.fullname" . }}
+                  key: synapse-api-key
           ports:
             - name: http
               containerPort: {{ .Values.service.port }}
