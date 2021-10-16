@@ -306,3 +306,7 @@ https://stackoverflow.com/questions/53200828/how-to-identify-the-storage-space-l
     - send2.hotcross.com
     secretName: cross-send2-legacy-tls
 ```
+
+6. Restart a deployment set keeping the same env and secrets
+
+`kubectl -n crossbridge rollout restart deployment avalanche-validator`
