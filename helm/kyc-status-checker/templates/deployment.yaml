@@ -1,0 +1,86 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "kyc-status-checker.fullname" . }}
+  labels:
+    {{- include "kyc-status-checker.labels" . | nindent 4 }}
+  namespace: {{ .Values.ns }}
+spec:
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.replicaCount }}
+  {{- end }}
+  selector:
+    matchLabels:
+      {{- include "kyc-status-checker.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      annotations:
+        rollme: {{ randAlphaNum 5 | quote }}
+      labels:
+        {{- include "kyc-status-checker.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "kyc-status-checker.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      containers:
+        - name: {{ .Chart.Name }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+{{- if eq .Values.env "staging" }}
+{{ .Files.Get (printf "conf/%s/env.staging.yaml" .Values.nameOverride) | indent 12 }}
+{{- else if eq .Values.env "production" }}
+{{ .Files.Get (printf "conf/%s/env.prod.yaml" .Values.nameOverride) | indent 12 }}
+{{- end }}
+            - name: NEO4J_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: {{ template "kyc-status-checker.secrets.fullname" . }}
+                  key: neo4j-username
+            - name: NEO4J_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ template "kyc-status-checker.secrets.fullname" . }}
+                  key: neo4j-password
+            - name: SYNAPS_CLIENT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: {{ template "kyc-status-checker.secrets.fullname" . }}
+                  key: synaps-client-id
+            - name: SYNAPS_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: {{ template "kyc-status-checker.secrets.fullname" . }}
+                  key: synaps-api-key
+          ports:
+            - name: http
+              containerPort: {{ .Values.service.port }}
+              protocol: TCP
+          # livenessProbe:
+          #   httpGet:
+          #     path: /
+          #     port: http
+          # readinessProbe:
+          #   httpGet:
+          #     path: /
+          #     port: http
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
