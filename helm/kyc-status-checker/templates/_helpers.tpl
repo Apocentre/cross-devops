@@ -63,5 +63,5 @@ Create the name of the service account to use
 
 {{- define "kyc-status-checker.secrets.fullname" -}}
 {{- $name := default .Chart.Name .Values.nameOverride -}}
-{{- printf "%s-%s-secrets" .Chart.Name $name | trunc 63 | trimSuffix "-" -}}
+{{- printf "%s-secrets" $name | trunc 63 | trimSuffix "-" -}}
 {{- end -}}

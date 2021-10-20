@@ -58,6 +58,16 @@ spec:
                 secretKeyRef:
                   name: {{ template "analytics-api.secrets.fullname" . }}
                   key: redis-password
+            - name: SYNAPS_CLIENT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: {{ template "analytics-api.secrets.fullname" . }}
+                  key: synaps-client-id
+            - name: SYNAPS_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: {{ template "analytics-api.secrets.fullname" . }}
+                  key: synaps-api-key
             - name: LOGGLY_TOKEN
               valueFrom:
                 secretKeyRef:
