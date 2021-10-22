@@ -83,6 +83,11 @@ spec:
                 secretKeyRef:
                   name: {{ template "cross-api.secrets.fullname" . }}
                   key: neo4j-password
+            - name: PRIVATE_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: {{ template "cross-api.secrets.fullname" . }}
+                  key: priv-key
             - name: KYC_PRIVATE_KEY
               valueFrom:
                 secretKeyRef:

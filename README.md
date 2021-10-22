@@ -285,6 +285,11 @@ Then you can rollback
 
 will rollback to the previous revision.
 
+Or if you want to rollback to a specific revision then find the latest revision and the use any of the previous revisions you want
+
+- `helm list`
+- `helm rollback hotcross-app 20`
+
 You can find the revisions here 
 
 `helm history <chart-name>`
