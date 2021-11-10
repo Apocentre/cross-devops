@@ -53,16 +53,6 @@ spec:
                 secretKeyRef:
                   name: {{ template "cross-yield-consumer.secrets.fullname" . }}
                   key: redis-password
-            - name: LOGGLY_TOKEN
-              valueFrom:
-                secretKeyRef:
-                  name: {{ template "cross-yield-consumer.secrets.fullname" . }}
-                  key: loggly-token
-            - name: LOGGLY_SUBDOMAIN
-              valueFrom:
-                secretKeyRef:
-                  name: {{ template "cross-yield-consumer.secrets.fullname" . }}
-                  key: loggly-subdomain
           ports:
             - name: http
               containerPort: {{ .Values.service.port }}

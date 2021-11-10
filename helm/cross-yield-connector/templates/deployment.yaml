@@ -43,16 +43,6 @@ spec:
                 secretKeyRef:
                   name: {{ template "cross-yield-connector.secrets.fullname" . }}
                   key: web3-provider
-            - name: LOGGLY_TOKEN
-              valueFrom:
-                secretKeyRef:
-                  name: {{ template "cross-yield-connector.secrets.fullname" . }}
-                  key: loggly-token
-            - name: LOGGLY_SUBDOMAIN
-              valueFrom:
-                secretKeyRef:
-                  name: {{ template "cross-yield-connector.secrets.fullname" . }}
-                  key: loggly-subdomain
             - name: REDIS_PASSWORD
               valueFrom:
                 secretKeyRef:
