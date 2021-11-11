@@ -43,21 +43,16 @@ spec:
                 secretKeyRef:
                   name: {{ template "cross-pool-connector.secrets.fullname" . }}
                   key: web3-provider
-            - name: LOGGLY_TOKEN
-              valueFrom:
-                secretKeyRef:
-                  name: {{ template "cross-pool-connector.secrets.fullname" . }}
-                  key: loggly-token
-            - name: LOGGLY_SUBDOMAIN
-              valueFrom:
-                secretKeyRef:
-                  name: {{ template "cross-pool-connector.secrets.fullname" . }}
-                  key: loggly-subdomain
             - name: REDIS_PASSWORD
               valueFrom:
                 secretKeyRef:
                   name: {{ template "cross-pool-connector.secrets.fullname" . }}
                   key: redis-password
+            - name: GH_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: {{ template "apr-feed.secrets.fullname" . }}
+                  key: gh-token
           ports:
             - name: http
               containerPort: {{ .Values.service.port }}
