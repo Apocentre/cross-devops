@@ -41,17 +41,17 @@ spec:
             - name: WEB3_PROVIDER
               valueFrom:
                 secretKeyRef:
-                  name: {{ template "cross-pool-connector.secrets.fullname" . }}
+                  name: {{ template "cross-pool-v2-connector.secrets.fullname" . }}
                   key: web3-provider
             - name: REDIS_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: {{ template "cross-pool-connector.secrets.fullname" . }}
+                  name: {{ template "cross-pool-v2-connector.secrets.fullname" . }}
                   key: redis-password
             - name: GH_TOKEN
               valueFrom:
                 secretKeyRef:
-                  name: {{ template "apr-feed.secrets.fullname" . }}
+                  name: {{ template "cross-pool-v2-connector.fullname" . }}
                   key: gh-token
           ports:
             - name: http

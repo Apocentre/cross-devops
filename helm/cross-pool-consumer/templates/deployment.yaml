@@ -56,7 +56,7 @@ spec:
             - name: GH_TOKEN
               valueFrom:
                 secretKeyRef:
-                  name: {{ template "apr-feed.secrets.fullname" . }}
+                  name: {{ template "cross-pool-consumer.secrets.fullname" . }}
                   key: gh-token     
           ports:
             - name: http
