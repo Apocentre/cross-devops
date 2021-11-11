@@ -103,6 +103,11 @@ spec:
                 secretKeyRef:
                   name: {{ template "cross-api.secrets.fullname" . }}
                   key: synapse-api-key
+            - name: GH_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: {{ template "cross-api.secrets.fullname" . }}
+                  key: gh-token
           ports:
             - name: http
               containerPort: {{ .Values.service.port }}
