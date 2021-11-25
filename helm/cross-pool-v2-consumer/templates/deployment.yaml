@@ -34,9 +34,9 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           env:
 {{- if eq .Values.env "staging" }}
-{{tpl (.Files.Get "conf/env.staging.yaml") . | indent 12 }}
+{{ .Files.Get (printf "conf/%s/env.staging.yaml" .Values.nameOverride) | indent 12 }}
 {{- else if eq .Values.env "production" }}
-{{tpl (.Files.Get "conf/env.prod.yaml") . | indent 12 }}
+{{ .Files.Get (printf "conf/%s/env.prod.yaml" .Values.nameOverride) | indent 12 }}
 {{- end }}
             - name: NEO4J_USERNAME
               valueFrom:
