@@ -23,4 +23,4 @@ spec:
   tls:
   - hosts:
     - mint-api.hotcross.com
-    secretName: cross-mint-tls
+    secretName: cross-mint-api-tls

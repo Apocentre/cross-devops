@@ -300,7 +300,7 @@ kubectl -n <namespace> exec <pod-name> df
 
 https://stackoverflow.com/questions/53200828/how-to-identify-the-storage-space-left-in-a-persistent-volume-claim
 
-5. We cannot have nultiple tls secrets with the same name in the same namespace as we can't have multiple plain secrets with the same name. So if we want to have multiple certificates for different domain names in the same namespace we need to use unique secret name in the ingress
+5. We cannot have multiple tls secrets with the same name in the same namespace as we can't have multiple plain secrets with the same name. So if we want to have multiple certificates for different domain names in the same namespace we need to use unique secret name in the ingress
 
 ```
   tls:
