@@ -1,3 +1,4 @@
+# Deploy the frontend
 **Choose Values for Cross Vest**
 
 - Admin
@@ -7,6 +8,8 @@
 - Investor
 
 `helm install cross-vest-investor helm/cross-vest -f helm/cross-vest/values-investor.yaml`
+
+# Deploy the indexer
 
 - Connect to the pod
 
