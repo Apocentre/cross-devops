@@ -9,14 +9,14 @@ ns: crossvest
 
 image:
   # use registry.digitalocean.com/hotcross-staging/cross-vest for staging env
-  repository: registry.digitalocean.com/hotcross-staging/vest-connector
+  repository: registry.digitalocean.com/hotcross/vest-connector
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: 1.0.0-beta.1
+  tag: 1.0.0
 
 imagePullSecrets:
   # use hotcross-staging for staging env
-  - name: "hotcross-staging"
+  - name: "hotcross"
 nameOverride: ""
 fullnameOverride: ""
 
