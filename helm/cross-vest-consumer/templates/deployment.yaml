@@ -38,21 +38,6 @@ spec:
 {{- else if eq .Values.env "production" }}
 {{ .Files.Get (printf "conf/%s/env.prod.yaml" .Values.nameOverride) | indent 12 }}
 {{- end }}
-            - name: WEB3_PROVIDER
-              valueFrom:
-                secretKeyRef:
-                  name: {{ template "cross-vest-consumer.secrets.fullname" . }}
-                  key: web3-provider
-            - name: LOGGLY_TOKEN
-              valueFrom:
-                secretKeyRef:
-                  name: {{ template "cross-vest-consumer.secrets.fullname" . }}
-                  key: loggly-token
-            - name: LOGGLY_SUBDOMAIN
-              valueFrom:
-                secretKeyRef:
-                  name: {{ template "cross-vest-consumer.secrets.fullname" . }}
-                  key: loggly-subdomain
             - name: REDIS_PASSWORD
               valueFrom:
                 secretKeyRef:

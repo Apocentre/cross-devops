@@ -18,7 +18,7 @@
 - Create a topic
 
 - `kafka-topics.sh --create --topic cross-vest-events-56 --bootstrap-server localhost:9092`
-- `kafka-topics.sh --create --topic cross-vest-events-42 --bootstrap-server localhost:9092`
+- `kafka-topics.sh --create --topic cross-vest-events-1 --bootstrap-server localhost:9092`
 - `kafka-topics.sh --create --topic cross-vest-events-137 --bootstrap-server localhost:9092`
 
 - Verify the topic was created
@@ -30,8 +30,8 @@
 - `helm install cross-vest-connector-56 --set nameOverride="bsc" helm/cross-vest-connector`
 - `helm install cross-vest-consumer-56 --set nameOverride="bsc" helm/cross-vest-consumer`
 
-- `helm install cross-vest-connector-42 --set nameOverride="eth" helm/cross-vest-connector`
-- `helm install cross-vest-consumer-42 --set nameOverride="eth" helm/cross-vest-consumer`
+- `helm install cross-vest-connector-1 --set nameOverride="eth" helm/cross-vest-connector`
+- `helm install cross-vest-consumer-1 --set nameOverride="eth" helm/cross-vest-consumer`
 
 - `helm install cross-vest-connector-137 --set nameOverride="polygon" helm/cross-vest-connector`
 - `helm install cross-vest-consumer-137 --set nameOverride="polygon" helm/cross-vest-consumer`
