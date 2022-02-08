@@ -8,14 +8,14 @@ env: production
 ns: indexer
 
 image:
-  # use registry.digitalocean.com/hotcross/cross-yield for staging env
+  # use registry.digitalocean.com/hotcross-staging/nft-staking-consumer for staging env
   repository: registry.digitalocean.com/hotcross/nft-staking-consumer
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
   tag: 0.1.0
 
 imagePullSecrets:
-  # use hotcross for staging env
+  # use hotcross-staging for staging env
   - name: "hotcross"
 nameOverride: ""
 fullnameOverride: ""
