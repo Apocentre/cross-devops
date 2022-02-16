@@ -1,0 +1,86 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "nft-staking-consumer.fullname" . }}
+  labels:
+    {{- include "nft-staking-consumer.labels" . | nindent 4 }}
+  namespace: {{ .Values.ns }}
+spec:
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.replicaCount }}
+  {{- end }}
+  selector:
+    matchLabels:
+      {{- include "nft-staking-consumer.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      annotations:
+        rollme: {{ randAlphaNum 5 | quote }}
+      labels:
+        {{- include "nft-staking-consumer.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "nft-staking-consumer.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      containers:
+        - name: {{ .Chart.Name }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+{{- if eq .Values.env "staging" }}
+{{ .Files.Get (printf "conf/%s/env.staging.yaml" .Values.nameOverride) | indent 12 }}
+{{- else if eq .Values.env "production" }}
+{{ .Files.Get (printf "conf/%s/env.prod.yaml" .Values.nameOverride) | indent 12 }}
+{{- end }}
+            - name: NEO4J_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: {{ template "nft-staking-consumer.secrets.fullname" . }}
+                  key: neo4j-username
+            - name: NEO4J_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ template "nft-staking-consumer.secrets.fullname" . }}
+                  key: neo4j-password
+            - name: REDIS_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ template "nft-staking-consumer.secrets.fullname" . }}
+                  key: redis-password
+            - name: GH_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: {{ template "nft-staking-consumer.secrets.fullname" . }}
+                  key: gh-token
+          ports:
+            - name: http
+              containerPort: {{ .Values.service.port }}
+              protocol: TCP
+          # livenessProbe:
+          #   httpGet:
+          #     path: /
+          #     port: http
+          # readinessProbe:
+          #   httpGet:
+          #     path: /
+          #     port: http
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
