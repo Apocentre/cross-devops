@@ -1,9 +1,9 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "cross-pool-consumer.fullname" . }}
+  name: {{ include "cross-pool-v2-consumer.fullname" . }}
   labels:
-    {{- include "cross-pool-consumer.labels" . | nindent 4 }}
+    {{- include "cross-pool-v2-consumer.labels" . | nindent 4 }}
   namespace: {{ .Values.ns }}
 spec:
   {{- if not .Values.autoscaling.enabled }}
@@ -11,19 +11,19 @@ spec:
   {{- end }}
   selector:
     matchLabels:
-      {{- include "cross-pool-consumer.selectorLabels" . | nindent 6 }}
+      {{- include "cross-pool-v2-consumer.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       annotations:
         rollme: {{ randAlphaNum 5 | quote }}
       labels:
-        {{- include "cross-pool-consumer.selectorLabels" . | nindent 8 }}
+        {{- include "cross-pool-v2-consumer.selectorLabels" . | nindent 8 }}
     spec:
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      serviceAccountName: {{ include "cross-pool-consumer.serviceAccountName" . }}
+      serviceAccountName: {{ include "cross-pool-v2-consumer.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
@@ -41,22 +41,22 @@ spec:
             - name: NEO4J_USERNAME
               valueFrom:
                 secretKeyRef:
-                  name: {{ template "cross-pool-consumer.secrets.fullname" . }}
+                  name: {{ template "cross-pool-v2-consumer.secrets.fullname" . }}
                   key: neo4j-username
             - name: NEO4J_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: {{ template "cross-pool-consumer.secrets.fullname" . }}
+                  name: {{ template "cross-pool-v2-consumer.secrets.fullname" . }}
                   key: neo4j-password
             - name: REDIS_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: {{ template "cross-pool-consumer.secrets.fullname" . }}
+                  name: {{ template "cross-pool-v2-consumer.secrets.fullname" . }}
                   key: redis-password
             - name: GH_TOKEN
               valueFrom:
                 secretKeyRef:
-                  name: {{ template "apr-feed.secrets.fullname" . }}
+                  name: {{ template "cross-pool-v2-consumer.secrets.fullname" . }}
                   key: gh-token
           ports:
             - name: http

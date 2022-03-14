@@ -1,9 +1,9 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "cross-pool-connector.fullname" . }}
+  name: {{ include "cross-pool-v2-connector.fullname" . }}
   labels:
-    {{- include "cross-pool-connector.labels" . | nindent 4 }}
+    {{- include "cross-pool-v2-connector.labels" . | nindent 4 }}
   namespace: {{ .Values.ns }}
 spec:
   {{- if not .Values.autoscaling.enabled }}
@@ -11,19 +11,19 @@ spec:
   {{- end }}
   selector:
     matchLabels:
-      {{- include "cross-pool-connector.selectorLabels" . | nindent 6 }}
+      {{- include "cross-pool-v2-connector.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       annotations:
         rollme: {{ randAlphaNum 5 | quote }}
       labels:
-        {{- include "cross-pool-connector.selectorLabels" . | nindent 8 }}
+        {{- include "cross-pool-v2-connector.selectorLabels" . | nindent 8 }}
     spec:
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      serviceAccountName: {{ include "cross-pool-connector.serviceAccountName" . }}
+      serviceAccountName: {{ include "cross-pool-v2-connector.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
@@ -51,7 +51,7 @@ spec:
             - name: GH_TOKEN
               valueFrom:
                 secretKeyRef:
-                  name: {{ template "cross-pool-v2-connector.fullname" . }}
+                  name: {{ template "cross-pool-v2-connector.secrets.fullname" . }}
                   key: gh-token
           ports:
             - name: http

@@ -1,9 +1,9 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ include "cross-pool-connector.fullname" . }}
+  name: {{ include "cross-pool-v2-connector.fullname" . }}
   labels:
-    {{- include "cross-pool-connector.labels" . | nindent 4 }}
+    {{- include "cross-pool-v2-connector.labels" . | nindent 4 }}
   namespace: {{ .Values.ns }}
 spec:
   type: {{ .Values.service.type }}
@@ -13,4 +13,4 @@ spec:
       protocol: TCP
       name: http
   selector:
-    {{- include "cross-pool-connector.selectorLabels" . | nindent 4 }}
+    {{- include "cross-pool-v2-connector.selectorLabels" . | nindent 4 }}
