@@ -78,14 +78,3 @@ Neo4JS is available: - at `neo4j-neo4j.indexer.svs.cluster.local:7687`
 `cypher-shell`
 
 and enter the credentials when prompted
-
-
-**Choose Values for Cross Vest**
-
-- Admin
-
-`helm install cross-vest-admin helm/cross-vest -f helm/cross-vest/values-admin.yaml`
-
-- Investor
-
-`helm install cross-vest-investor helm/cross-vest -f helm/cross-vest/values-investor.yaml`
