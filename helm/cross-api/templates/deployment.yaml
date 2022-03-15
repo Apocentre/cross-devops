@@ -48,6 +48,16 @@ spec:
                 secretKeyRef:
                   name: {{ template "cross-api.secrets.fullname" . }}
                   key: bsc-web3-providers
+            - name: AVALANCHE_WEB3_PROVIDERS
+              valueFrom:
+                secretKeyRef:
+                  name: {{ template "cross-api.secrets.fullname" . }}
+                  key: avalanche-web3-providers
+            - name: POLYGON_WEB3_PROVIDERS
+              valueFrom:
+                secretKeyRef:
+                  name: {{ template "cross-api.secrets.fullname" . }}
+                  key: polygon-web3-providers
             - name: AWS_ACCESS_KEY_ID
               valueFrom:
                 secretKeyRef:
