@@ -77,4 +77,4 @@ Neo4JS is available: - at `neo4j-neo4j.indexer.svs.cluster.local:7687`
 
 `cypher-shell`
 
-and enter the credentials when prompted
+and enter the credentials when promptedcd
