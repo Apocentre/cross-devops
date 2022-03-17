@@ -1,3 +1,7 @@
+Before deploying a service make sure that you set the secrets.
+
+In each service there is a `secrets.example.yaml` file. You will have to copy this and rename it to `secrets.prod.yaml`. Also, you would have to add the missing values.
+
 1. Use the correct version for each docker image
 2. Replace the GITHUB_TOKEN with your own key
 3. Run the correct command from below

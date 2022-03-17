@@ -2,7 +2,8 @@
 TOKEN.txt
 GeoLite2-City_20210406.tar.gz
 GeoLite2-Country_20210413.tar.gz
-*secrets*.yaml
+secrets.prod.yaml
+secrets.staging.yaml
 certs
 DevNotes.md
 hotcross-c49d10123d59.json
