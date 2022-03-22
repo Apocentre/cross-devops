@@ -1,25 +1,45 @@
+# Instructions
+
+For each project, first run the commands on the project's repository and then the commands in this (devops) repository.
+
+## In each project's repository
+
+1. Merge latest develop into main and push the main branch
+2. Run the correct command from the list below to build and push the docker image; add your github token in the `GITHUB_TOKEN` field
+3. Push the image that has been created
+
+    e.g. `registry.digitalocean.com/hotcross/hotcross-app:2.43.0`
+
+4. Create and push the tag for the newly built version, e.g `v2.43.0`. 
+
+    Tags can be custom named for certain projects, you can check the tags list for the naming scheme by running `git tag`
+
+## In this (devops) repository
+
 Before deploying a service make sure that you set the secrets.
 
-In each service there is a `secrets.example.yaml` file. You will have to copy this and rename it to `secrets.prod.yaml`. Also, you would have to add the missing values.
+In each service there is a `secrets.example.yaml` file. You will have to copy this and rename it to `secrets.prod.yaml`. Also, you would have to add the missing values. Never commit any changes to the `secrets.example.yaml` file, the `secrets.prod.yaml` is git-ignored by default.
 
-1. Use the correct version for each docker image
-2. Replace the GITHUB_TOKEN with your own key
-3. Run the correct command from below
-4. Push the image that has been created
+1. Update the `tag` field in the project chart's `values.yaml` file with the correct version for each docker image
+2. Upgrade deployment on K8s
 
-e.g. `registry.digitalocean.com/hotcross/hotcross-app:2.43.0`
+    `helm upgrade cross-api helm/cross-api`
 
-5. Upgrade deployment on K8s
+3. Verify the deployment was successful (replace `-n api` with the appropriate namespace)
 
-`helm upgrade cross-api helm/cross-api`
+    `kubectl -n api get pods`: this will return the list of pods. If run immediately after deployment you should see a list of pods as __Terminating__ and some as __ContainerCreating__. As long as no error shows there, the old pods disappear and the new pods show as __Running__, the deployment went ok.
+
+    `kucectl -n api describe pods <pod>`: Get information about the pods deployment. Use this command if something is wrong with the deplotment
+
+    `kucectl -n api logs <pod>`: Get the logs of the instance.
 
 The list of services we use are:
 
 - `helm upgrade hotcross-app helm/hotcross-app`
-- `helm upgrade hotcross-app helm/hotcross-app`
+- `helm upgrade cross-api helm/cross-api`
 - `helm upgrade cross-mint helm/cross-mint`
 - `helm upgrade cross-send helm/cross-send`
-...
+- ...
 
 Hotcross App
 ===
@@ -28,16 +48,6 @@ Hotcross App
  docker build \
  --build-arg GITHUB_TOKEN= \
  -t registry.digitalocean.com/hotcross/hotcross-app:2.43.0 \
- -f ./operations/cross-pool/Dockerfile .
-```
-
-Cross Pool
-===
-
-```
- docker build \
- --build-arg GITHUB_TOKEN= \
- -t registry.digitalocean.com/hotcross/cross-pool:1.15.3 \
  -f ./operations/cross-pool/Dockerfile .
 ```
 
