@@ -12,7 +12,7 @@ image:
   repository: registry.digitalocean.com/hotcross/cross-api
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: 3.14.0
+  tag: 3.15.0
 
 imagePullSecrets:
   # use hotcross-staging for staging env
