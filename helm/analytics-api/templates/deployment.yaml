@@ -78,6 +78,21 @@ spec:
                 secretKeyRef:
                   name: {{ template "analytics-api.secrets.fullname" . }}
                   key: loggly-subdomain
+            - name: GH_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: {{ template "analytics-api.secrets.fullname" . }}
+                  key: gh-token
+            - name: UNMARSHAL_AUTH_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: {{ template "analytics-api.secrets.fullname" . }}
+                  key: unmarshal-auth-key
+            - name: WEB3_PROVIDER
+              valueFrom:
+                secretKeyRef:
+                  name: {{ template "analytics-api.secrets.fullname" . }}
+                  key: web3-provider
           ports:
             - name: http
               containerPort: {{ .Values.service.port }}
