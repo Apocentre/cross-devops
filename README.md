@@ -179,6 +179,23 @@ check consumer lag
 
 `/opt/bitnami/kafka/bin/kafka-consumer-groups.sh --bootstrap-server localhost:9092 --describe --group cross-pool-consumer-group`
 
+Increase kafka topic partitions
+===
+
+In the case where a single consumer is too slow and causes significant lag in the queue, we can increase the topic partitions and scale the consumers.
+
+to scale the consumer group partitions
+
+`./kafka-topics.sh --bootstrap-server localhost:9092 --alter --topic <topic>  --partitions <num_partitions>`
+
+to view details of the partitions
+
+`./kafka-topics.sh --bootstrap-server localhost:9092 --describe --topic <topic>`
+
+once the consumers have been scaled, we can check which instances are in which partition
+
+`./kafka-consumer-groups.sh --bootstrap-server localhost:9092 --describe -group <consumer_group>`
+
 Erase Neo4j
 ===
 
