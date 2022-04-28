@@ -282,11 +282,6 @@ Start local neo4j with a backup file
 create or replace database backup
 :use backup
 ```
-// in cypher-shell
-:use systerm
-create or replace database asd
-:use asd
-
 Notes
 ===
 - A very useful tutorial on setting up Cert Manager is
