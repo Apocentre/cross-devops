@@ -258,6 +258,35 @@ Nginx Http Basic Auth
 
 https://www.digitalocean.com/community/tutorials/how-to-set-up-basic-http-authentication-with-nginx-on-ubuntu-14-04
 
+Start local neo4j with a backup file
+===
+
+1. Copy the backup file to the 
+
+`docker cp ~/Downloads/data/neo4j neo4j:/tmp/backup`
+
+
+2. Restore a back within the container
+
+- `docker exec -it neo4j /bin/bash`
+- `neo4j-admin restore --from=/tmp/backup/ --database=backup`
+
+3. restart container
+
+- `docker restart neo4j` 
+
+4. Open you https://localhost:7474 and run the following commands
+
+```
+:use system
+create or replace database backup
+:use backup
+```
+// in cypher-shell
+:use systerm
+create or replace database asd
+:use asd
+
 Notes
 ===
 - A very useful tutorial on setting up Cert Manager is
