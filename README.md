@@ -261,26 +261,27 @@ https://www.digitalocean.com/community/tutorials/how-to-set-up-basic-http-authen
 Start local neo4j with a backup file
 ===
 
-1. Copy the backup file to the 
+1. Copy the backup file from you local machine into the docker container.
+Note! change `~/Desktop` into the location where the downloaded and unzipped backup file is located.
 
-`docker cp ~/Downloads/data/neo4j neo4j:/tmp/backup`
+`docker cp ~/Desktop/data/neo4j/ <neo4j container>:/tmp/backup`
 
 
 2. Restore a back within the container
 
-- `docker exec -it neo4j /bin/bash`
-- `neo4j-admin restore --from=/tmp/backup/ --database=backup`
+- `docker exec -it <neo4j container> bash`
+- `neo4j-admin restore --from=/tmp/backup --database=prod`
 
 3. restart container
 
-- `docker restart neo4j` 
+- `docker restart <neo4j container>` 
 
-4. Open you https://localhost:7474 and run the following commands
+4. Open you https://localhost:7474 and run the following commands. Alternatively you can use cypher-shell with the docker container bash.
 
 ```
 :use system
-create or replace database backup
-:use backup
+create or replace database prod
+:use prod
 ```
 Notes
 ===
