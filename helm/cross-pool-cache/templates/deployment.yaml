@@ -83,6 +83,11 @@ spec:
                 secretKeyRef:
                   name: {{ template "cross-pool-cache.secrets.fullname" . }}
                   key: neo4j-password
+            - name: GH_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: {{ template "analytics-api.secrets.fullname" . }}
+                  key: gh-token
           ports:
             - name: http
               containerPort: {{ .Values.service.port }}
