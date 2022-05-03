@@ -283,6 +283,7 @@ Note! change `~/Desktop` into the location where the downloaded and unzipped bac
 create or replace database prod
 :use prod
 ```
+
 Notes
 ===
 - A very useful tutorial on setting up Cert Manager is
