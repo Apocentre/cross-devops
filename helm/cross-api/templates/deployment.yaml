@@ -58,6 +58,11 @@ spec:
                 secretKeyRef:
                   name: {{ template "cross-api.secrets.fullname" . }}
                   key: polygon-web3-providers
+            - name: AURORA_WEB3_PROVIDERS
+              valueFrom:
+                secretKeyRef:
+                  name: {{ template "cross-api.secrets.fullname" . }}
+                  key: aurora-web3-providers
             - name: AWS_ACCESS_KEY_ID
               valueFrom:
                 secretKeyRef:
