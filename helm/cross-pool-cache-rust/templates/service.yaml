@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "cross-pool-cache-rust.fullname" . }}
+  labels:
+    {{- include "cross-pool-cache-rust.labels" . | nindent 4 }}
+  namespace: {{ .Values.ns }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: {{ .Values.service.port }}
+      targetPort: http
+      protocol: TCP
+      name: http
+  selector:
+    {{- include "cross-pool-cache-rust.selectorLabels" . | nindent 4 }}
