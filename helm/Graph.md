@@ -22,7 +22,13 @@ Check that the graph db was created:
 If success then the database exists
 
 
-2. Install Graph
+2. Install IPFS
+
+```
+helm install ipfs helm/ipfs
+```
+
+3. Install Graph
 
 ```
 helm install graph-node-1029 --set nameOverride="bttc" helm/graph-node
