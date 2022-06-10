@@ -1,0 +1,67 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+  name: graph-node
+  namespace: bttc
+spec:
+  rules:
+  - host: graph.hotcross.dev
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: graph-node
+            port:
+              number: 8000
+  - host: graph-json-rpc.hotcross.dev
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: graph-node
+            port:
+              number: 8020
+  - host: graph-json-rpc.hotcross.dev
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: graph-node
+            port:
+              number: 8020
+  - host: graph-subgraph.hotcross.dev
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: graph-node
+            port:
+              number: 8030
+  - host: graph-ws.hotcross.dev
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: graph-node
+            port:
+              number: 8001
+  tls:
+  - hosts:
+    - graph.hotcross.dev
+    - graph-ws.hotcross.dev
+    - graph-json-rpc.hotcross.dev
+    - graph-subgraph.hotcross.dev
+    secretName: hotcross-graph-tls

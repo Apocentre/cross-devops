@@ -8,8 +8,8 @@ env: production
 ns: bttc
 
 image:
-  # use registry.digitalocean.com/hotcross-staging/cross-pool for staging env
-  repository: registry.digitalocean.com/hotcross/graph-node
+  # use registry.digitalocean.com/hotcross-staging/graph-node for staging env
+  repository: registry.digitalocean.com/hotcross-staging/graph-node
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
   tag: 0.26.0
