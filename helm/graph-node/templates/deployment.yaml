@@ -1,0 +1,85 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "graph-node.fullname" . }}
+  labels:
+    {{- include "graph-node.labels" . | nindent 4 }}
+  namespace: {{ .Values.ns }}
+spec:
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.replicaCount }}
+  {{- end }}
+  selector:
+    matchLabels:
+      {{- include "graph-node.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      annotations:
+        rollme: {{ randAlphaNum 5 | quote }}
+      labels:
+        {{- include "graph-node.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "graph-node.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      containers:
+        - name: {{ .Chart.Name }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+{{- if eq .Values.env "staging" }}
+{{tpl (.Files.Get "conf/env.staging.yaml") . | indent 12 }}
+{{- else if eq .Values.env "production" }}
+{{tpl (.Files.Get "conf/env.prod.yaml") . | indent 12 }}
+{{- end }}
+            - name: POSTGRES_URL
+              valueFrom:
+                secretKeyRef:
+                  name: {{ template "graph-node.secrets.fullname" . }}
+                  key: postgres-url
+            - name: ETHEREUM_RPC
+              valueFrom:
+                secretKeyRef:
+                  name: {{ template "graph-node.secrets.fullname" . }}
+                  key: bttc:archive:https://pre-rpc.bt.io/
+          ports:
+            - name: graphql_http
+              containerPort: 8000
+              protocol: TCP
+            - name: graphql_ws
+              containerPort: 8001
+              protocol: TCP
+            - name: json_rpc
+              containerPort: 8020
+              protocol: TCP
+            - name: subgraph_status
+              containerPort: 8030
+              protocol: TCP
+          # livenessProbe:
+          #   httpGet:
+          #     path: /
+          #     port: http
+          # readinessProbe:
+          #   httpGet:
+          #     path: /
+          #     port: http
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}

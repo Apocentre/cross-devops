@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "graph-node.fullname" . }}
+  labels:
+    {{- include "graph-node.labels" . | nindent 4 }}
+  namespace: {{ .Values.ns }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: 8000
+      targetPort: graphql_http
+      protocol: TCP
+      name: graphql_http
+    - port: 8001
+      targetPort: graphql_ws
+      protocol: TCP
+      name: graphql_ws
+    - port: 8020
+      targetPort: json_rpc
+      protocol: TCP
+      name: json_rpc
+    - port: 8030
+      targetPort: subgraph_status
+      protocol: TCP
+      name: subgraph_status
+  selector:
+    {{- include "graph-node.selectorLabels" . | nindent 4 }}
