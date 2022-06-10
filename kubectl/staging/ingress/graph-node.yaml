@@ -15,7 +15,7 @@ spec:
         path: "/"
         backend:
           service:
-            name: graph-node
+            name: graph-node-1029-bttc
             port:
               number: 8000
   - host: graph-ws.hotcross.dev
@@ -25,7 +25,7 @@ spec:
         path: "/"
         backend:
           service:
-            name: graph-node
+            name: graph-node-1029-bttc
             port:
               number: 8001
   - host: graph-json-rpc.hotcross.dev
@@ -35,7 +35,7 @@ spec:
         path: "/"
         backend:
           service:
-            name: graph-node
+            name: graph-node-1029-bttc
             port:
               number: 8020
   - host: graph-subgraph.hotcross.dev
@@ -45,7 +45,7 @@ spec:
         path: "/"
         backend:
           service:
-            name: graph-node
+            name: graph-node-1029-bttc
             port:
               number: 8030
   tls:
