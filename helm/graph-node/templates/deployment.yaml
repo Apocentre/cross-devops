@@ -34,9 +34,9 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           env:
 {{- if eq .Values.env "staging" }}
-{{tpl (.Files.Get "conf/env.staging.yaml") . | indent 12 }}
+{{ .Files.Get (printf "conf/%s/env.staging.yaml" .Values.nameOverride) | indent 12 }}
 {{- else if eq .Values.env "production" }}
-{{tpl (.Files.Get "conf/env.prod.yaml") . | indent 12 }}
+{{ .Files.Get (printf "conf/%s/env.prod.yaml" .Values.nameOverride) | indent 12 }}
 {{- end }}
             - name: POSTGRES_URL
               valueFrom:
@@ -47,18 +47,18 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: {{ template "graph-node.secrets.fullname" . }}
-                  key: bttc:archive:https://pre-rpc.bt.io/
+                  key: ethereum-rpc
           ports:
-            - name: graphql_http
+            - name: graphql-http
               containerPort: 8000
               protocol: TCP
-            - name: graphql_ws
+            - name: graphql-ws
               containerPort: 8001
               protocol: TCP
-            - name: json_rpc
+            - name: json-rpc
               containerPort: 8020
               protocol: TCP
-            - name: subgraph_status
+            - name: subgraph-status
               containerPort: 8030
               protocol: TCP
           # livenessProbe:

@@ -18,7 +18,7 @@ spec:
             name: graph-node
             port:
               number: 8000
-  - host: graph-json-rpc.hotcross.dev
+  - host: graph-ws.hotcross.dev
     http:
       paths:
       - pathType: Prefix
@@ -27,7 +27,7 @@ spec:
           service:
             name: graph-node
             port:
-              number: 8020
+              number: 8001
   - host: graph-json-rpc.hotcross.dev
     http:
       paths:
@@ -48,16 +48,6 @@ spec:
             name: graph-node
             port:
               number: 8030
-  - host: graph-ws.hotcross.dev
-    http:
-      paths:
-      - pathType: Prefix
-        path: "/"
-        backend:
-          service:
-            name: graph-node
-            port:
-              number: 8001
   tls:
   - hosts:
     - graph.hotcross.dev

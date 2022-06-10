@@ -9,20 +9,20 @@ spec:
   type: {{ .Values.service.type }}
   ports:
     - port: 8000
-      targetPort: graphql_http
+      targetPort: graphql-http
       protocol: TCP
-      name: graphql_http
+      name: graphql-http
     - port: 8001
-      targetPort: graphql_ws
+      targetPort: graphql-ws
       protocol: TCP
-      name: graphql_ws
+      name: graphql-ws
     - port: 8020
-      targetPort: json_rpc
+      targetPort: json-rpc
       protocol: TCP
-      name: json_rpc
+      name: json-rpc
     - port: 8030
-      targetPort: subgraph_status
+      targetPort: subgraph-status
       protocol: TCP
-      name: subgraph_status
+      name: subgraph-status
   selector:
     {{- include "graph-node.selectorLabels" . | nindent 4 }}
