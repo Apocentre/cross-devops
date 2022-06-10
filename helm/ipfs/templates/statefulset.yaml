@@ -42,12 +42,12 @@ spec:
             - name: http-2
               containerPort: 8080
               protocol: TCP
-            - name: http-3
-              containerPort: 4001
-              protocol: TCP
-            - name: udp
-              containerPort: 4001
-              protocol: UDP
+            # - name: http-3
+            #   containerPort: 4001
+            #   protocol: TCP
+            # - name: udp
+            #   containerPort: 4001
+            #   protocol: UDP
           volumeMounts:
             - name: ipfs
               mountPath: /data/ipfs

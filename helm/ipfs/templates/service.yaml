@@ -15,13 +15,13 @@ spec:
       targetPort: 8080
       protocol: TCP
       name: http-2
-    - port: 4001
-      targetPort: 4001
-      protocol: TCP
-      name: http-3
-    - port: 4001
-      targetPort: 4001
-      protocol: UDP
-      name: udp
+    # - port: 4001
+    #   targetPort: 4001
+    #   protocol: TCP
+    #   name: http-3
+    # - port: 4001
+    #   targetPort: 4001
+    #   protocol: UDP
+    #   name: udp
   selector:
     {{- include "ipfs.selectorLabels" . | nindent 4 }}
