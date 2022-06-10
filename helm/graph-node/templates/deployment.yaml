@@ -38,12 +38,17 @@ spec:
 {{- else if eq .Values.env "production" }}
 {{ .Files.Get (printf "conf/%s/env.prod.yaml" .Values.nameOverride) | indent 12 }}
 {{- end }}
-            - name: POSTGRES_URL
+            - name: postgres_user
               valueFrom:
                 secretKeyRef:
                   name: {{ template "graph-node.secrets.fullname" . }}
-                  key: postgres-url
-            - name: ETHEREUM_RPC
+                  key: postgres-user
+            - name: postgres_pass
+              valueFrom:
+                secretKeyRef:
+                  name: {{ template "graph-node.secrets.fullname" . }}
+                  key: postgres-pass
+            - name: ethereum
               valueFrom:
                 secretKeyRef:
                   name: {{ template "graph-node.secrets.fullname" . }}
