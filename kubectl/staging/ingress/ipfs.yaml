@@ -18,7 +18,18 @@ spec:
             name: ipfs
             port:
               number: 5001
+  - host: ipfs-api.hotcross.dev
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: ipfs
+            port:
+              number: 8080
   tls:
   - hosts:
     - ipfs.hotcross.dev
+    - ipfs-api.hotcross.dev
     secretName: hotcross-ipfs-tls
