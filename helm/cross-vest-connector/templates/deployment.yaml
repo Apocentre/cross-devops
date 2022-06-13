@@ -58,6 +58,16 @@ spec:
                 secretKeyRef:
                   name: {{ template "cross-vest-connector.secrets.fullname" . }}
                   key: neo4j-password
+            - name: LOGGLY_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: {{ template "cross-yield-connector.secrets.fullname" . }}
+                  key: loggly-token
+            - name: LOGGLY_SUBDOMAIN
+              valueFrom:
+                secretKeyRef:
+                  name: {{ template "cross-yield-connector.secrets.fullname" . }}
+                  key: loggly-subdomain
           ports:
             - name: http
               containerPort: {{ .Values.service.port }}
